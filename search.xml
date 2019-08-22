@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[恢复误删文件]]></title>
+    <title><![CDATA[Git恢复误删文件]]></title>
     <url>%2F2019%2F08%2F22%2F%E6%81%A2%E5%A4%8D%E8%AF%AF%E5%88%A0%E6%96%87%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[Step 1：git statusStep 2：git reset HEAD [ 被删除的文件或文件夹 ]Step 3：git checkout [ 被删除的文件或文件夹 ]]]></content>
       <tags>
