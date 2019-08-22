@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[恢复误删文件]]></title>
+    <url>%2F2019%2F08%2F22%2F%E6%81%A2%E5%A4%8D%E8%AF%AF%E5%88%A0%E6%96%87%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[Step 1：git statusStep 2：git reset HEAD [ 被删除的文件或文件夹 ]Step 3：git checkout [ 被删除的文件或文件夹 ]]]></content>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TypeScript中使用ESlint]]></title>
+    <url>%2F2019%2F04%2F29%2FTypeScript%E4%B8%AD%E4%BD%BF%E7%94%A8ESlint%2F</url>
+    <content type="text"><![CDATA[TypeScript 已经不再维护 TSlint，转投 ESlint，所以代码检查也切到 ESlint。 安装依赖1yarn add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --dev 添加.eslintrc.js 配置文件12345678910111213141516171819202122232425262728293031323334353637383940module.exports = &#123; parser: "@typescript-eslint/parser", // Specifies the ESLint parser extends: [ // 'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react // 'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin ], parserOptions: &#123; ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features sourceType: "module", // Allows for the use of imports ecmaFeatures: &#123; // 不允许 return 语句出现在 global 环境下 globalReturn: false, // 开启全局 script 模式 impliedStrict: true, jsx: true // Allows for the parsing of JSX &#125; &#125;, env: &#123; browser: true, node: true, commonjs: true, es6: true &#125;, // 以当前目录为根目录，不再向上查找 .eslintrc.js root: true, //指定你所要使用的全局变量，true代表允许重写、false代表不允许重写 globals: &#123; describe: false, it: false, expect: false &#125;, rules: &#123; // 定义规则 &#125;, settings: &#123; react: &#123; version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use &#125; &#125;&#125;; 启用保存时候自动修复（VScode）1234567"eslint.autoFixOnSave": true,"eslint.validate": [ "javascript", "javascriptreact", &#123;"language": "typescript", "autoFix": true &#125;, &#123;"language": "typescriptreact", "autoFix": true &#125;], 如果无效的时候，检查下是否安装eslint-plugin-html]]></content>
+      <categories>
+        <category>TypeScript</category>
+      </categories>
+      <tags>
+        <tag>eslint</tag>
+        <tag>TypeScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ios9一些JavaScript兼容]]></title>
+    <url>%2F2018%2F12%2F26%2Fios9%E4%B8%80%E4%BA%9BJavaScript%E5%85%BC%E5%AE%B9%2F</url>
+    <content type="text"><![CDATA[ios9浏览器上一些坑。 ios9不支持let promise 123456//安装npm install --save @babel/polyfill es6-promise//使用import "@babel/polyfill";import Es6Promise from "es6-promise";Es6Promise.polyfill(); 不支持URLSearchParams方法 123npm install --save url-search-params-polyfillimport "url-search-params-polyfill";]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[koa(六) koa-multer上传文件]]></title>
+    <url>%2F2018%2F11%2F22%2Fkoa-%E5%85%AD-koa-multer%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[koa-multer是一个node.js中间件，用于处理multipart/form-data类型的表单数据，主要用于上传文件。 koa-multer是基于multer这个模块。 安装npm install --save koa-multer 配置12345678910111213const multer = require('koa-multer');let storage = multer.diskStorage(&#123; destination: function (req, file, cb) &#123; cb(null, 'public/upload'); //配置图片上传的目录 &#125;, filename: function (req, file, cb) &#123; /*图片上传完成重命名*/ var fileFormat = (file.originalname).split("."); cb(null, Date.now() + "." + fileFormat[fileFormat.length - 1]); &#125;&#125;);let upload = multer(&#123; storage: storage &#125;); 使用123456router.post('/upload', upload.single('face'), async (ctx, next) =&gt; &#123; ctx.body = &#123; filename: ctx.req.file.filename,//返回文件名 body:ctx.req.body &#125;&#125;)]]></content>
+      <categories>
+        <category>koa</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>koa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[mongoDB数据库导出导入]]></title>
+    <url>%2F2018%2F11%2F17%2FmongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%BC%E5%87%BA%E5%AF%BC%E5%85%A5%2F</url>
+    <content type="text"><![CDATA[mongoDB数据库导出/备份1234// 语法mongodump -h dbhost -d dbname -o dbdirectory// egmongodump -h 127.0.0.1 -d koa_db -o C:\Users\Administrator\Desktop\koabase 参数： -h mongoDB所在服务器的地址，例如：127.0.0.1，或者指定端口号：127.0.0.1:27017 -d 需要导出的数据库，例如：koa_db -o 备份的数据存放位置，例如：C:\Users\Administrator\Desktop\koabase mongoDB数据库导入/恢复1234// 语法mongorestore -h dbhost -d dbname path// egmongorestore -h 127.0.0.1 -d koa_demo C:\Users\Administrator\Desktop\koabase\koa_db 参数： -h mongoDB所在服务器的地址，例如：127.0.0.1，或者指定端口号：127.0.0.1:27017 -d 需要导导入的数据库，例如：koa_demo path 备份的数据存放位置，例如：C:\Users\Administrator\Desktop\koabase]]></content>
+      <categories>
+        <category>mongoDB</category>
+      </categories>
+      <tags>
+        <tag>mongoDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[koa(五) svg-captcha 生成图片验证码]]></title>
+    <url>%2F2018%2F11%2F15%2Fkoa-%E4%BA%94-svg-captcha-%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E9%AA%8C%E8%AF%81%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[使用svg-captcha可以比较方便的生成图片验证码 https://github.com/lemonce/svg-captcha 安装npm install --save svg-captcha 使用12345const svgCaptcha = require('svg-captcha');const c = svgCaptcha.create();console.log(c);// &#123;data: '&lt;svg.../svg&gt;', text: 'abcd'&#125; 生成普通验证码 生成算式验证码 1let captcha = svgCaptcha.createMathExpr(); options参数 size: 4 // 验证码长度 ignoreChars: ‘0o1i’ // 验证码字符中排除 0o1i noise: 1 // 干扰线条的数量 color: true // 验证码的字符是否有颜色，默认没有，如果设定了背景，则默认有 background: ‘#cc9966’ // 验证码图片背景颜色 fontSize: 50 width: 100 height:40 在koa中使用前端请求一个URL返回一个验证码 1234567891011121314151617//验证码router.get('/code', async (ctx) =&gt; &#123; let captcha = svgCaptcha.create(&#123; size: 4, fontSize: 50, noise: 3, width: 120, height: 34, background: "#cc9966" &#125;); ctx.session.code = captcha.text; //设置响应头 ctx.response.type = "image/svg+xml"; ctx.body = captcha.data;&#125;);]]></content>
+      <categories>
+        <category>koa</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>koa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[koa(四) koa-session]]></title>
+    <url>%2F2018%2F11%2F13%2Fkoa-%E5%9B%9B-koa-session%2F</url>
+    <content type="text"><![CDATA[sessionsession是另一种记录客户状态的机制，与Cookie的区别是Cookie保存在客户端浏览器中，而session保存在服务器上。 当浏览器访问服务器并发送第一次请求时，服务器端会创建一个 session 对象，生成一个类似于 key,value 的键值对， 然后将 key(cookie)返回到浏览器(客户)端，浏览器下次再访问时，携带 key(cookie)，找到对应的 session(value)。客户的信息都保存在 session 中。 安装1npm install koa-session --save 配置123456789101112131415const session = require('koa-session');const Koa = require('koa');const app = new Koa();app.keys = ['some secret hurr'];const CONFIG = &#123; key: 'koa:sess', //cookie key (default is koa:sess) maxAge: 86400000, // cookie 的过期时间 maxAge in ms (default is 1 days) overwrite: true, //是否可以 overwrite (默认 default true) httpOnly: true, //cookie 是否只有服务器端可以访问 httpOnly or not (default true) signed: true, //签名默认 true rolling: false, //在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false） renew: false, //(boolean) renew session when session is nearly expired,&#125;;app.use(session(CONFIG, app)); 使用12ctx.session.username = "张三"; //设置值 ctx.session.username //获取值 Cookie 和 和 Session 区别 cookie 数据存放在客户的浏览器上，session 数据放在服务器上。 cookie 不是很安全，别人可以分析存放在本地的 COOKIE 并进行 COOKIE 欺骗考虑到安全应当使用 session。 session 会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能考虑到减轻服务器性能方面，应当使用 COOKIE。 单个 cookie 保存的数据不能超过 4K，很多浏览器都限制一个站点最多保存 20 个 cookie。]]></content>
+      <categories>
+        <category>koa</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>koa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[koa(三) koa中Cookie中的使用]]></title>
+    <url>%2F2018%2F11%2F13%2Fkoa-%E4%B8%89-koa%E4%B8%ADcookie%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[用法 koa中设置Cookie ctx.cookies.set(name, value, [options]) koa中获取Cookie的值 ctx.cookies.get(name) Options domain cookie所在的域名 path cookie所在的路径,默认’/‘ maxAge 有效时长 expires 失效时间 secure 安全cookie，默认false，设置为true时只有https可以访问 httpOnly 是否只是服务器可访问cookie, 默认true overwrite 是否允许重写 设置中文Cookie123new Buffer('hello, world!').toString('base64'); //转换成base64new Buffer('aGVsbG8sIHdvcmxkIQ==', 'base64').toString() //还原base64]]></content>
+      <categories>
+        <category>koa</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>koa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[koa(二) koa-static]]></title>
+    <url>%2F2018%2F11%2F13%2Fkoa-%E4%BA%8C-koa-static%2F</url>
+    <content type="text"><![CDATA[koa静态资源中间件。 安装1npm install --save koa-static 使用1234567const Koa = require('koa');const app = new Koa();const static = require('koa-static');// app.use(static(root, opts));// 配置路径可以配置多个app.use(static(__dirname + './www'))]]></content>
+      <categories>
+        <category>koa</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>koa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[koa(一) koa-bodyparser]]></title>
+    <url>%2F2018%2F11%2F12%2Fkoa-%E4%B8%80-koa-bodyparser%2F</url>
+    <content type="text"><![CDATA[koa中解析body的中间件，支持json,form,text,可以用来获取post提交的数据 原生Node.js获取post提交的数据123456789101112131415function parsePostData(ctx) &#123; return new Promise((resolve, reject) =&gt; &#123; try &#123; let postdata = ""; ctx.req.on('data', data =&gt; &#123; postdata += data; &#125;); ctx.req.on('end', () =&gt; &#123; resolve(postdata); &#125;); &#125; catch (error) &#123; reject(error); &#125; &#125;);&#125; 安装1npm install --save koa-bodyparser 使用123456789101112const Koa = require('koa');const bodyParse = require('koa-bodyparser');const app = new Koa();app.use(bodyParse());app.use(async ctx =&gt; &#123; // the parsed body will store in ctx.request.body // if nothing was parsed, body will be an empty object &#123;&#125; ctx.body = ctx.request.body;&#125;); 链接文档]]></content>
+      <categories>
+        <category>koa</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
+        <tag>koa</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[封装操作mongoDB的CRUD操作类]]></title>
+    <url>%2F2018%2F08%2F12%2F%E5%B0%81%E8%A3%85%E6%93%8D%E4%BD%9CmongoDB%E7%9A%84CRUD%E6%93%8D%E4%BD%9C%E7%B1%BB%2F</url>
+    <content type="text"><![CDATA[建议使用更加成熟的node.js操作mongoDB库，例如 mongoose 等，本文指在学习交流。 文件目录123module|--config.js //数据库配置|--db.js //操作类 config.js数据库配置12345const app = &#123; dbUrl: 'mongodb://localhost:27017', dbName: 'koa'&#125;module.exports = app; db.js操作类123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121const MongoClient = require('mongodb').MongoClient;const Config = require('./config.js');class DB &#123; //单例模式 static getInstance() &#123; if (!DB.instance) &#123; DB.instance = new DB(); &#125; return DB.instance; &#125; //构造函数 constructor() &#123; this.dbClient = null; this.connect(); &#125; //根据配置连接数据库 connect() &#123; return new Promise((resolve, reject) =&gt; &#123; if (!this.dbClient) &#123; const client = new MongoClient(Config.dbUrl); client.connect(err =&gt; &#123; if (err) &#123; reject(err); &#125; else &#123; this.dbClient = client.db(Config.dbName) resolve(this.dbClient); &#125; &#125;) &#125; else &#123; resolve(this.dbClient); &#125; &#125;); &#125; /** * 插入数据 * @param &#123;String&#125; collectionName 表名 * @param &#123;*&#125; json 插入数据 */ insert(collectionName, json) &#123; return new Promise((resolve, reject) =&gt; &#123; this.connect().then(db =&gt; &#123; db.collection(collectionName).insertOne(json, (err, result) =&gt; &#123; if (err) &#123; reject(err); return; &#125; resolve(result); &#125;); &#125;); &#125;); &#125; /** * 查找 * @param &#123;String&#125; collectionName 表名 * @param &#123;*&#125; json 查找条件 */ find(collectionName, json) &#123; return new Promise((resolve, reject) =&gt; &#123; this.connect().then(db =&gt; &#123; const collection = db.collection(collectionName); collection.find(json).toArray((err, docs) =&gt; &#123; if (err) &#123; reject(err); return &#125; resolve(docs); &#125;); &#125;); &#125;); &#125; /** * 更新 * @param &#123;String&#125; collectionName 表名 * @param &#123;*&#125; json1 查找条件 * @param &#123;*&#125; json2 更新的数据 */ update(collectionName, json1, json2) &#123; return new Promise((resolve, reject) =&gt; &#123; this.connect().then(db =&gt; &#123; db.collection(collectionName).updateOne(json1, &#123; $set: json2 &#125;, (err, result) =&gt; &#123; if (err) &#123; reject(err); return; &#125; resolve(result); &#125;); &#125;); &#125;); &#125; /** * 删除 * @param &#123;String&#125; collectionName 表名 * @param &#123;*&#125; json 查找条件 */ remove(collectionName, json) &#123; return new Promise((resolve, reject) =&gt; &#123; this.connect().then(db =&gt; &#123; db.collection(collectionName).removeOne(json, (err, result) =&gt; &#123; if (err) &#123; reject(err); return; &#125; resolve(result); &#125;); &#125;); &#125;); &#125; &#125;module.exports = DB.getInstance(); 使用例如在koa中使用 123456789101112131415161718192021222324252627const koa = require('koa');const router = require('koa-router')();const DB = require("./module/db.js");const app = new koa();router.get('/add', async (ctx) =&gt; &#123; let data = await DB.insert('user', &#123; 'username': "赵柳", 'sex': '女', 'age': 29 &#125;); ctx.body = "add";&#125;);router.get('/login', async (ctx, next) =&gt; &#123; let result = await DB.find('user', &#123;'username': '赵柳'&#125;); ctx.body = result;&#125;);router.get('/edit', async (ctx) =&gt; &#123; let data = await DB.update('user', &#123; 'username': '赵柳' &#125;, &#123; 'age': 32 &#125;); ctx.body = "edit";&#125;);router.get('/delete', async (ctx) =&gt; &#123; let data = await DB.remove('user', &#123; 'username': '赵柳' &#125;); ctx.body = "edit";&#125;);]]></content>
+      <categories>
+        <category>mongoDB</category>
+      </categories>
+      <tags>
+        <tag>mongoDB</tag>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Node.js连接mongoDB]]></title>
+    <url>%2F2018%2F08%2F12%2FNode-js%E8%BF%9E%E6%8E%A5MongoDB%2F</url>
+    <content type="text"><![CDATA[安装mongodb1npm install mongodb --save 连接MongoDB需要已经安装并启动mongoDB服务,创建app.js,添加下列代码。使用node app.js运行。 1234567891011121314151617const MongoClient = require('mongodb').MongoClient;const assert = require('assert');// Connection URLconst url = 'mongodb://localhost:27017';// Create a new MongoClientconst client = new MongoClient(url);client.connect(function(err) &#123; assert.equal(null, err); console.log("Connected successfully to server"); const db = client.db(dbName); client.close();&#125;); 文档]]></content>
+      <categories>
+        <category>mongoDB</category>
+      </categories>
+      <tags>
+        <tag>mongoDB</tag>
+        <tag>Node.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[selinux开启和关闭]]></title>
+    <url>%2F2018%2F06%2F29%2F%E5%BC%80%E5%90%AF%E5%92%8C%E5%85%B3%E9%97%AD%2F</url>
+    <content type="text"><![CDATA[SELinux 是一款为了提高系统安全性的软件，但会和很多服务冲突，可以选择关闭 查看 SELinux 状态 # getenforce Disabled 关闭，其他的都表示开启状态# sestatus -v SELinux status: enabled/disabled 关闭 SELinux 假设 SELinux 是正在运行的，我们可以使用setenforce 命令设置临时关闭，不用重启生效。 # setenforce 0 改变配置文件，需要重启生效 # vi /etc/selinux/config 将SELINUX=enforcing改为SELINUX=disabled，保存重启即可]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ESlint校验规则]]></title>
+    <url>%2F2017%2F09%2F27%2Feslint%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99%2F</url>
+    <content type="text"><![CDATA[整理了一份eslint校验规则，以备查询规则]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>eslint</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vue-cli的webpack模板项目文件配置学习]]></title>
+    <url>%2F2017%2F09%2F17%2Fvue-cli%E7%9A%84webpack%E6%A8%A1%E6%9D%BF%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0%2F</url>
+    <content type="text"><![CDATA[最近在用vue-cli生成的webpack模板做项目，开发过程中需要改动webpack配置，研究了一下配置文件，发现了一篇很好的博文http://blog.csdn.net/hongchh/article/details/55113751照个注释，自己也过了一遍。 文件结构响应内容 123456789101112131415161718├─build│ ├─build.js│ ├─check-versions.js│ ├─dev-client.js│ ├─dev-server.js│ ├─utils.js│ ├─vue-loader.conf.js│ ├─webpack.base.conf.js│ ├─webpack.dev.conf.js│ ├─webpack.prod.conf.js│ └─webpack.test.conf.js├─config│ ├─dev.env.js│ ├─index.js│ ├─prod.env.js│ └─test.env.js├─...└─package.json build/dev-server.js首先来看执行”npm run dev”时候最先执行的build/dev-server.js文件。该文件主要完成下面几件事情： 检查node和npm的版本、引入相关插件和配置 webpack对源码进行编译打包并返回compiler对象 创建express服务器 配置开发中间件（webpack-dev-middleware）和热重载中间件（webpack-hot-middleware） 挂载代理服务和中间件 配置静态资源 启动服务器监听特定端口（8080） 自动打开浏览器并打开特定网址（localhost:8080） 代码注释 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136//检查nodeJs和npm的版本require('./check-versions')()//获取基本配置var config = require('../config')//如果node的环境变量中没有设置当前的环境（NODE_ENV）,则使用config中的dev环境配置作为当前的环境 if (!process.env.NODE_ENV) &#123; process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)&#125;//opn是一个可以调用默认的软件打开网址，图片，文件等内容的插件//这里用它来调用默认的浏览器打开dev-server监听的端口 例如localhose:8080var opn = require('opn')var path = require('path')var express = require('express')var webpack = require('webpack')//http-proxy-middleware是一个express中间件，用于将http请求代理到其他服务器//例如: localhost:8080/api/xxx --&gt; localhost:3000/api/xxx//这里使用该插件可以将欠打un开发中涉及到的请求代理到提供服务的后台服务器上，方便与服务器对接var proxyMiddleware = require('http-proxy-middleware')//开发环境下的webpack 配置var webpackConfig = require('./webpack.dev.conf')//dev-server监听的端口，如果没有在命令行传入端口号，则使用config.dev.port设置的端口// default port where dev server listens for incoming trafficvar port = process.env.PORT || config.dev.port//用于判断是否要自动打开浏览器的布尔变量，没有设置的时候默认为false// automatically open browser, if not set will be falsevar autoOpenBrowser = !!config.dev.autoOpenBrowser//HTTP代理表，指定规则，将某些api请求代理到相应的服务器// Define HTTP proxies to your custom API backend// https://github.com/chimurai/http-proxy-middlewarevar proxyTable = config.dev.proxyTable//创建express服务器var app = express()//webpack 根据配置开始编译打包源码并且返回compiler对象var compiler = webpack(webpackConfig)//webpack-dev-middleware将webpack编译打包后得的产品文件存放在内存中而没有写入磁盘//将这个中间件挂到express上使用之后即可提供这些编译后的产品服务var devMiddleware = require('webpack-dev-middleware')(compiler, &#123; //设置访问路径为webpack配置中的output对应的路径 publicPath: webpackConfig.output.publicPath, //设置为true使其不要在控制台输出日志 quiet: true&#125;)//webpack-hot-middleware 用于实现热重载功能的中间件var hotMiddleware = require('webpack-hot-middleware')(compiler, &#123; //关闭控制台的日输出 log: false, //发送心跳包的频率 heartbeat: 2000&#125;)//webpack重新编译打包完成后并将JS，CSS等文件inject到html文件之后，通过热重载中间件强制页面刷新// force page reload when html-webpack-plugin template changescompiler.plugin('compilation', function(compilation) &#123; compilation.plugin('html-webpack-plugin-after-emit', function(data, cb) &#123; hotMiddleware.publish(&#123; action: 'reload' &#125;) cb() &#125;)&#125;)//根据proxyTable中的代理请求配置来设置express服务器中的http代理规则// proxy api requestsObject.keys(proxyTable).forEach(function(context) &#123; var options = proxyTable[context] //格式化option,例如将www.example.com 变成&#123;target: 'www.example.com'&#125; if (typeof options === 'string') &#123; options = &#123; target: options &#125; &#125; app.use(proxyMiddleware(options.filter || context, options))&#125;)// handle fallback for HTML5 history API// 重定向不存在的URL，用于支持SPA(单页面应用)// 例如使用vue-router并且开启了history模式app.use(require('connect-history-api-fallback')())// serve webpack bundle output// 挂载webpack-dev-middleware中间件，提供webpack编译打包后的产品文件服务app.use(devMiddleware)// enable hot-reload and state-preserving// compilation error display// 挂载热重载中间件app.use(hotMiddleware)// serve pure static assets//提供static文件夹上的静态文件服务var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)app.use(staticPath, express.static('./static'))//访问链接var uri = 'http://localhost:' + port//创建promise,在应用服务启动之后的resolve//便于外部文件require了这个dev-server之后的代码编写var _resolvevar readyPromise = new Promise(resolve =&gt; &#123; _resolve = resolve&#125;)console.log('&gt; Starting dev server...') //webpack-dev-middleware等待webpack完成所有编译打包之后输出提示语到控制台，表明服务正式启动 // 服务正式启动之后才自动打开浏览器进入页面devMiddleware.waitUntilValid(() =&gt; &#123; console.log('&gt; Listening at ' + uri + '\n') // when env is testing, don't need open it if (autoOpenBrowser &amp;&amp; process.env.NODE_ENV !== 'testing') &#123; opn(uri) &#125; _resolve()&#125;)// 启动express服务器并监听响应的端口var server = app.listen(port)// 暴露本模块的功能给外部使用，例如下面的用法// var devServer = require('./build/dev-seerver')//devServer.ready.then(() =&gt; &#123;...&#125;)//if(...)&#123;devServer.close()&#125;module.exports = &#123; ready: readyPromise, close: () =&gt; &#123; server.close() &#125;&#125; build/webpack.base.conf.jswebpack.base.conf.js主要完成了下面这些事情： 配置webpack编译入口 配置webpack输出路径和命名规则 配置模块resolve规则 配置不同类型模块的处理规则 说明： 这个配置里面只配置了.js、.vue、图片、字体等几类文件的处理规则，如果需要处理其他文件可以在module.rules里面另行配置。 代码注释12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394var path = require('path')var utils = require('./utils')var config = require('../config')var vueLoaderConfig = require('./vue-loader.conf') // 在开头引入webpack，后面的plugins那里需要var webpack = require("webpack")//获取绝对路径function resolve(dir) &#123; return path.join(__dirname, '..', dir)&#125;module.exports = &#123; //webpack 入口文件 entry: &#123; app: './src/main.js' &#125;, //webpack 输出路径和命名规则 output: &#123; //webpack 输出的目标文件夹luj(例如：/dist) path: config.build.assetsRoot, //webpack 输出bundle文件命名格式 filename: '[name].js', //webpack 编译输出的发布路径 publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath &#125;, //模块resolve的规则 resolve: &#123; extensions: ['.js', '.vue', '.json'], //别名，方便引用模块 alias: &#123; 'vue$': 'vue/dist/vue.esm.js', '@': resolve('src') &#125; &#125;, //不同类型模块处理规则 module: &#123; rules: [&#123; // 对所有.vue文件使用vue-loader进行编译 test: /\.vue$/, loader: 'vue-loader', options: vueLoaderConfig &#125;, &#123; // 对src和test文件夹下的.js文件使用babel-loader将es6+的代码转成es5 test: /\.js$/, loader: 'babel-loader', include: [resolve('src'), resolve('test')] &#125;, &#123; // 对图片资源文件使用url-loader test: /\.(png|jpe?g|gif|svg)(\?.*)?$/, loader: 'url-loader', options: &#123; // 小于10K的图片转成base64编码的dataURL字符串写到代码中 limit: 10000, // 其他的图片转移到静态资源文件夹 name: utils.assetsPath('img/[name].[hash:7].[ext]') &#125; &#125;, &#123; // 对多媒体资源文件使用url-loader test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, loader: 'url-loader', options: &#123; // 小于10K的资源转成base64编码的dataURL字符串写到代码中 limit: 10000, // 其他的资源转移到静态资源文件夹 name: utils.assetsPath('media/[name].[hash:7].[ext]') &#125; &#125;, &#123; // 对字体资源文件使用url-loader test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/, loader: 'url-loader', options: &#123; // 小于10K的资源转成base64编码的dataURL字符串写到代码中 limit: 10000, // 其他的资源转移到静态资源文件夹 name: utils.assetsPath('fonts/[name].[hash:7].[ext]') &#125; &#125; ] &#125;, // 增加一个plugins plugins: [ new webpack.ProvidePlugin(&#123; $: "jquery", jQuery: "jquery" &#125;) ]&#125; build/webpack.dev.conf.js接下来看webpack.dev.conf.js，这里面在webpack.base.conf的基础上增加完善了开发环境下面的配置，主要包括下面几件事情： 将webpack的热重载客户端代码添加到每个entry对应的应用 合并基础的webpack配置 配置样式文件的处理规则，styleLoaders 配置Source Maps 配置webpack插件 代码注释 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849var utils = require('./utils')var webpack = require('webpack')var config = require('../config')// webpack-merge是一个可以合并数组和对象的插件var merge = require('webpack-merge')var baseWebpackConfig = require('./webpack.base.conf')// html-webpack-plugin用于将webpack编译打包后的产品文件注入到html模板中// 即自动在index.html里面加上&lt;link&gt;和&lt;script&gt;标签引用webpack打包后的文件var HtmlWebpackPlugin = require('html-webpack-plugin')// friendly-errors-webpack-plugin用于更友好地输出webpack的警告、错误等信息var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')// add hot-reload related code to entry chunks// 给每个入口页面(应用)加上dev-client，用于跟dev-server的热重载插件通信，实现热更新Object.keys(baseWebpackConfig.entry).forEach(function(name) &#123; baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])&#125;)module.exports = merge(baseWebpackConfig, &#123; module: &#123; // 样式文件的处理规则，对css/sass/scss等不同内容使用相应的styleLoaders // 由utils配置出各种类型的预处理语言所需要使用的loader，例如sass需要使用sass-loader rules: utils.styleLoaders(&#123; sourceMap: config.dev.cssSourceMap &#125;) &#125;, // cheap-module-eval-source-map is faster for development // 使用这种source-map更快 devtool: '#cheap-module-eval-source-map', plugins: [ new webpack.DefinePlugin(&#123; 'process.env': config.dev.env &#125;), // https://github.com/glenjamin/webpack-hot-middleware#installation--usage // 开启webpack热更新功能 new webpack.HotModuleReplacementPlugin(), // webpack编译过程中出错的时候跳过报错阶段，不会阻塞编译，在编译结束后报错 new webpack.NoEmitOnErrorsPlugin(), // https://github.com/ampedandwired/html-webpack-plugin // 自动将依赖注入html模板，并输出最终的html文件到目标文件夹 new HtmlWebpackPlugin(&#123; filename: 'index.html', template: 'index.html', inject: true &#125;), new FriendlyErrorsPlugin() ]&#125;) build/utils.jsutils提供工具函数，包括生成处理各种样式语言的loader，获取资源文件存放路径的工具函数。 计算资源文件存放路径 生成cssLoaders用于加载.vue文件中的样式 生成styleLoaders用于加载不在.vue文件中的单独存在的样式文件 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687var path = require('path')var config = require('../config')// extract-text-webpack-plugin可以提取bundle中的特定文本，将提取后的文本单独存放到另外的文件// 这里用来提取css样式var ExtractTextPlugin = require('extract-text-webpack-plugin')// 资源文件的存放路径exports.assetsPath = function(_path) &#123; var assetsSubDirectory = process.env.NODE_ENV === 'production' ? config.build.assetsSubDirectory : config.dev.assetsSubDirectory return path.posix.join(assetsSubDirectory, _path)&#125;// 生成css、sass、scss等各种用来编写样式的语言所对应的loader配置exports.cssLoaders = function(options) &#123; options = options || &#123;&#125; var cssLoader = &#123; loader: 'css-loader', options: &#123; minimize: process.env.NODE_ENV === 'production', sourceMap: options.sourceMap &#125; &#125; // generate loader string to be used with extract text plugin // 生成各种loader配置，并且配置了extract-text-pulgin function generateLoaders(loader, loaderOptions) &#123; // 默认是css-loader var loaders = [cssLoader] // 如果非css，则增加一个处理预编译语言的loader并设好相关配置属性 // 例如generateLoaders('less')，这里就会push一个less-loader // less-loader先将less编译成css，然后再由css-loader去处理css // 其他sass、scss等语言也是一样的过程 if (loader) &#123; loaders.push(&#123; loader: loader + '-loader', options: Object.assign(&#123;&#125;, loaderOptions, &#123; sourceMap: options.sourceMap &#125;) &#125;) &#125; // Extract CSS when that option is specified // (which is the case during production build) if (options.extract) &#123; // 配置extract-text-plugin提取样式 return ExtractTextPlugin.extract(&#123; use: loaders, fallback: 'vue-style-loader' &#125;) &#125; else &#123; // 无需提取样式则简单使用vue-style-loader配合各种样式loader去处理&lt;style&gt;里面的样式 return ['vue-style-loader'].concat(loaders) &#125; &#125; // https://vue-loader.vuejs.org/en/configurations/extract-css.html // 得到各种不同处理样式的语言所对应的loader return &#123; css: generateLoaders(), postcss: generateLoaders(), less: generateLoaders('less'), sass: generateLoaders('sass', &#123; indentedSyntax: true &#125;), scss: generateLoaders('sass'), stylus: generateLoaders('stylus'), styl: generateLoaders('stylus') &#125;&#125;// Generate loaders for standalone style files (outside of .vue)// 生成处理单独的.css、.sass、.scss等样式文件的规则exports.styleLoaders = function(options) &#123; var output = [] var loaders = exports.cssLoaders(options) for (var extension in loaders) &#123; var loader = loaders[extension] output.push(&#123; test: new RegExp('\\.' + extension + '$'), use: loader &#125;) &#125; return output&#125; build/vue-loader.conf.js1234567891011121314151617181920var utils = require('./utils')var config = require('../config')var isProduction = process.env.NODE_ENV === 'production'module.exports = &#123; // 处理.vue文件中的样式 loaders: utils.cssLoaders(&#123; // 是否打开source-map sourceMap: isProduction ? config.build.productionSourceMap : config.dev.cssSourceMap, // 是否提取样式到单独的文件 extract: isProduction &#125;), transformToRequire: &#123; video: 'src', source: 'src', img: 'src', image: 'xlink:href' &#125;&#125; build/dev-client.jsdev-client.js里面主要写了浏览器端代码，用于实现webpack的热更新。 123456789101112131415/* eslint-disable */// 实现浏览器端的EventSource，用于跟服务器双向通信// webpack热重载客户端跟dev-server上的热重载插件之间需要进行双向通信// 服务端webpack重新编译后，会向客户端推送信息，告诉客户端进行更新require('eventsource-polyfill')// webpack热重载客户端var hotClient = require('webpack-hot-middleware/client?noInfo=true&amp;reload=true')// 客户端收到更新动作，执行页面刷新hotClient.subscribe(function(event) &#123; if (event.action === 'reload') &#123; window.location.reload() &#125;&#125;) build/build.js构建环境下的配置。执行”npm run build”的时候首先执行的是build/build.js文件，build.js主要完成下面几件事： loading动画 删除目标文件夹 执行webpack构建 输出信息说明： webpack编译之后会输出到配置里面指定的目标文件夹；删除目标文件夹之后再创建是为了去除旧的内容，以免产生不可预测的影响。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647// 检查NodeJS和npm的版本require('./check-versions')()process.env.NODE_ENV = 'production'// ora，一个可以在终端显示spinner的插件var ora = require('ora')// rm，用于删除文件或文件夹的插件var rm = require('rimraf')var path = require('path')// chalk，用于在控制台输出带颜色字体的插件var chalk = require('chalk')var webpack = require('webpack')var config = require('../config')var webpackConfig = require('./webpack.prod.conf')var spinner = ora('building for production...')// 开启loading动画spinner.start()// 首先将整个dist文件夹以及里面的内容删除，以免遗留旧的没用的文件// 删除完成后才开始webpack构建打包rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err =&gt; &#123; if (err) throw err // 执行webpack构建打包，完成之后在终端输出构建完成的相关信息或者输出报错信息并退出程序 webpack(webpackConfig, function(err, stats) &#123; spinner.stop() if (err) throw err process.stdout.write(stats.toString(&#123; colors: true, modules: false, children: false, chunks: false, chunkModules: false &#125;) + '\n\n') console.log(chalk.cyan(' Build complete.\n')) console.log(chalk.yellow( ' Tip: built files are meant to be served over an HTTP server.\n' + ' Opening index.html over file:// won\'t work.\n' )) &#125;)&#125;) build/webpack.prod.conf.js构建的时候用到的webpack配置来自webpack.prod.conf.js，该配置同样是在webpack.base.conf基础上的进一步完善。主要完成下面几件事情： 合并基础的webpack配置 配置样式文件的处理规则，styleLoaders 配置webpack的输出 配置webpack插件 gzip模式下的webpack插件配置 webpack-bundle分析说明： webpack插件里面多了压缩代码以及抽离css文件等插件。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145var path = require('path')var utils = require('./utils')var webpack = require('webpack')var config = require('../config')var merge = require('webpack-merge')var baseWebpackConfig = require('./webpack.base.conf')// copy-webpack-plugin，用于将static中的静态文件复制到产品文件夹distvar CopyWebpackPlugin = require('copy-webpack-plugin')var HtmlWebpackPlugin = require('html-webpack-plugin')var ExtractTextPlugin = require('extract-text-webpack-plugin')// optimize-css-assets-webpack-plugin，用于优化和最小化css资源var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')var env = config.build.envvar webpackConfig = merge(baseWebpackConfig, &#123; module: &#123; // 样式文件的处理规则，对css/sass/scss等不同内容使用相应的styleLoaders // 由utils配置出各种类型的预处理语言所需要使用的loader，例如sass需要使用sass-loader rules: utils.styleLoaders(&#123; sourceMap: config.build.productionSourceMap, extract: true &#125;) &#125;, // 是否使用source-map devtool: config.build.productionSourceMap ? '#source-map' : false, // webpack输出路径和命名规则 output: &#123; path: config.build.assetsRoot, filename: utils.assetsPath('js/[name].[chunkhash].js'), chunkFilename: utils.assetsPath('js/[id].[chunkhash].js') &#125;, plugins: [ // http://vuejs.github.io/vue-loader/en/workflow/production.html new webpack.DefinePlugin(&#123; 'process.env': env &#125;), //压缩JS代码 new webpack.optimize.UglifyJsPlugin(&#123; compress: &#123; warnings: false &#125;, sourceMap: true &#125;), // extract css into its own file // 将css提取到单独的文件 new ExtractTextPlugin(&#123; filename: utils.assetsPath('css/[name].[contenthash].css') &#125;), // Compress extracted CSS. We are using this plugin so that possible // duplicated CSS from different components can be deduped. // 优化、最小化css代码，如果只简单使用extract-text-plugin可能会造成css重复 // 具体原因可以看npm上面optimize-css-assets-webpack-plugin的介绍 new OptimizeCSSPlugin(&#123; cssProcessorOptions: &#123; safe: true &#125; &#125;), // generate dist index.html with correct asset hash for caching. // you can customize output by editing /index.html // see https://github.com/ampedandwired/html-webpack-plugin // 将产品文件的引用注入到index.html new HtmlWebpackPlugin(&#123; filename: config.build.index, template: 'index.html', inject: true, minify: &#123; // 删除index.html中的注释 removeComments: true, // 删除index.html中的空格 collapseWhitespace: true, // 删除各种html标签属性值的双引号 removeAttributeQuotes: true // more options: // https://github.com/kangax/html-minifier#options-quick-reference &#125;, // necessary to consistently work with multiple chunks via CommonsChunkPlugin // 注入依赖的时候按照依赖先后顺序进行注入，比如，需要先注入vendor.js，再注入app.js chunksSortMode: 'dependency' &#125;), // split vendor js into its own file // 将所有从node_modules中引入的js提取到vendor.js，即抽取库文件 new webpack.optimize.CommonsChunkPlugin(&#123; name: 'vendor', minChunks: function(module, count) &#123; // any required modules inside node_modules are extracted to vendor return ( module.resource &amp;&amp; /\.js$/.test(module.resource) &amp;&amp; module.resource.indexOf( path.join(__dirname, '../node_modules') ) === 0 ) &#125; &#125;), // extract webpack runtime and module manifest to its own file in order to // prevent vendor hash from being updated whenever app bundle is updated new webpack.optimize.CommonsChunkPlugin(&#123; name: 'manifest', chunks: ['vendor'] &#125;), // copy custom static assets // 将static文件夹里面的静态资源复制到dist/static new CopyWebpackPlugin([&#123; from: path.resolve(__dirname, '../static'), to: config.build.assetsSubDirectory, ignore: ['.*'] &#125;]) ]&#125;)// 如果开启了产品gzip压缩，则利用插件将构建后的产品文件进行压缩if (config.build.productionGzip) &#123; // 一个用于压缩的webpack插件 var CompressionWebpackPlugin = require('compression-webpack-plugin') webpackConfig.plugins.push( new CompressionWebpackPlugin(&#123; asset: '[path].gz[query]', // 压缩算法 algorithm: 'gzip', test: new RegExp( '\\.(' + config.build.productionGzipExtensions.join('|') + ')$' ), threshold: 10240, minRatio: 0.8 &#125;) )&#125;// 如果启动了report，则通过插件给出webpack构建打包后的产品文件分析报告if (config.build.bundleAnalyzerReport) &#123; var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin webpackConfig.plugins.push(new BundleAnalyzerPlugin())&#125;module.exports = webpackConfig build/check-versions.js完成对node和npm的版本检测 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657// chalk, 用于在控制台输出带颜色字体的插件var chalk = require('chalk')// semver, 语义化版本检查插件（The semantic version parser used by npm）var semver = require('semver')var packageConfig = require('../package.json')// shelljs, 执行Unix命令行的插件var shell = require('shelljs')// 开辟子进程执行指令cmd并返回结果function exec(cmd) &#123; return require('child_process').execSync(cmd).toString().trim()&#125;// node和npm版本需求var versionRequirements = [&#123; name: 'node', currentVersion: semver.clean(process.version), versionRequirement: packageConfig.engines.node&#125;, ]if (shell.which('npm')) &#123; versionRequirements.push(&#123; name: 'npm', currentVersion: exec('npm --version'), versionRequirement: packageConfig.engines.npm &#125;)&#125;module.exports = function() &#123; var warnings = [] // 依次判断版本是否符合要求 for (var i = 0; i &lt; versionRequirements.length; i++) &#123; var mod = versionRequirements[i] if (!semver.satisfies(mod.currentVersion, mod.versionRequirement)) &#123; warnings.push(mod.name + ': ' + chalk.red(mod.currentVersion) + ' should be ' + chalk.green(mod.versionRequirement) ) &#125; &#125; // 如果有警告则将其输出到控制台 if (warnings.length) &#123; console.log('') console.log(chalk.yellow('To use this template, you must update following to modules:')) console.log() for (var i = 0; i &lt; warnings.length; i++) &#123; var warning = warnings[i] console.log(' ' + warning) &#125; console.log() process.exit(1) &#125;&#125; config/index.jsconfig文件夹下最主要的文件就是index.js了，在这里面描述了开发和构建两种环境下的配置，前面的build文件夹下也有不少文件引用了index.js里面的配置。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768// see http://vuejs-templates.github.io/webpack for documentation.var path = require('path')// var proxyConfig = require('./proxyConfig')module.exports = &#123; // 构建产品时使用的配置 build: &#123; // 环境变量 env: require('./prod.env'), // html入口文件 index: path.resolve(__dirname, '../dist/index.html'), // 产品文件的存放路径 assetsRoot: path.resolve(__dirname, '../dist'), // 二级目录，存放静态资源文件的目录，位于dist文件夹下 assetsSubDirectory: 'static', // 发布路径，如果构建后的产品文件有用于发布CDN或者放到其他域名的服务器，可以在这里进行设置 // 设置之后构建的产品文件在注入到index.html中的时候就会带上这里的发布路径 assetsPublicPath: '/', // 是否使用source-map productionSourceMap: true, // Gzip off by default as many popular static hosts such as // Surge or Netlify already gzip all static assets for you. // Before setting to `true`, make sure to: // npm install --save-dev compression-webpack-plugin // 是否开启gzip压缩 productionGzip: false, // gzip模式下需要压缩的文件的扩展名，设置js、css之后就只会对js和css文件进行压缩 productionGzipExtensions: ['js', 'css'], // Run the build command with an extra argument to // View the bundle analyzer report after build finishes: // `npm run build --report` // Set to `true` or `false` to always turn it on or off // 是否展示webpack构建打包之后的分析报告 bundleAnalyzerReport: process.env.npm_config_report &#125;, // 开发过程中使用的配置 dev: &#123; // 环境变量 env: require('./dev.env'), // dev-server监听的端口 port: 8009, // 是否自动打开浏览器 autoOpenBrowser: true, // 静态资源文件夹 assetsSubDirectory: 'static', // 发布路径 assetsPublicPath: '/', // 代理配置表，在这里可以配置特定的请求代理到对应的API接口 // 例如将'localhost:8080/api/xxx'代理到'www.example.com/api/xxx' proxyTable: &#123;&#125;, // proxyTable: proxyConfig.proxyList, // CSS Sourcemaps off by default because relative paths are "buggy" // with this option, according to the CSS-Loader README // (https://github.com/webpack/css-loader#sourcemaps) // In our experience, they generally work as expected, // just be aware of this issue when enabling this option. cssSourceMap: false &#125;&#125; 配置注释在github上放了一份配置]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JSON解析与序列化]]></title>
+    <url>%2F2017%2F09%2F09%2FJSON%E8%A7%A3%E6%9E%90%E4%B8%8E%E5%BA%8F%E5%88%97%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[JSONJSON是JavaScript的一个严格的子集，利用JavaScript中的以小额模式来表示结构化数据,已经成为了互联网传输结构化数据的事实标准 语法JSON可以表示三种类型的值： 简单值使用与JavaScript相同的语法，可以在JSON中表示字符串，数值，布尔值和null。JSON不支持JavaScript中的特殊值 对象复杂数据类型，表示一组无序的键值对 数组复杂数据类型，表示一组有序的键值对 和JavaScript的一些区别，需要注意的地方 JSON字符串必须使用双引号 JSON中对象的属性名任何时候都必须加上双引号 JSON解析早起的JSON解析器基本上使用的是JavaScript的eval()函数。ECMAScript 5对解析JSON的行为进行了规范，定义了全局对象JSON,JSON对象有两个方法：stringify()和parse();旧版本浏览可以使用这个shim JSON.stringify()用于把JavaScript对象序列化成为JSON字符串。 语法：JSON.stringify(value[, replacer [, space]])value: 将要序列化成 一个JSON 字符串的值。replacer: 可选，过滤器，如果该参数是一个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中；如果该参数为null或者未提供，则对象所有的属性都会被序列化。space: 可选， 指定缩进用的空白字符串，用于美化输出；如果参数是个数字，它代表有多少的空格；上限为10。该值若小于1，则意味着没有空格；如果该参数为字符串(字符串的前十个字母)，该字符串将被作为空格；如果该参数没有提供（或者为null）将没有空格。 JSON.parse() 用于解析一个JSON字符串，构造由字符串描述的JavaScript值或对象。语法：JSON.parse(text[, reviver])text：要被解析成JavaScript值的字符串。reviver =: 如果是一个函数，则规定了原始值如何被解析改造，在被返回之前。]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>JSON</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vuex数据本地储存]]></title>
+    <url>%2F2017%2F08%2F27%2Fvuex%E6%95%B0%E6%8D%AE%E6%9C%AC%E5%9C%B0%E5%82%A8%E5%AD%98%2F</url>
+    <content type="text"><![CDATA[基本逻辑vuex 是 vue 的数据管理插件，存储的数据是响应式的。但是并不会保存起来，刷新之后就回到了初始状态，思路就是在vuex里数据改变的时候把数据拷贝一份保存到localStorage里面，刷新之后，如果localStorage里有保存的数据，取出来在替换store里的state。 实现localstore 存储 123456789101112131415161718192021222324252627//pageStore.jsexport const ls = &#123; //本地存数据，days 有效时间（天） setItem: function(key, value, days) &#123; let Days = Days || 7; //有效时间默认7天 let exp = new Date(); let expires = exp.getTime() + Days * 24 * 60 * 60 * 1000; localStorage.setItem(key, JSON.stringify(&#123; value, expires &#125;)); &#125;, getItem: function(key) &#123; let o = JSON.parse(localStorage.getItem(key)); if (!o || o.expires &lt; Date.now()) &#123; return null &#125; else &#123; return o.value &#125; &#125;, removeItem: function(key) &#123; localStorage.removeItem(key) &#125;&#125; vuex 插件 1234567891011121314151617181920212223242526272829303132import &#123; ls &#125; from './pageStore'function copy(obj) &#123; var copy = Object.create(Object.getPrototypeOf(obj)); var propNames = Object.getOwnPropertyNames(obj); propNames.forEach(function(name) &#123; var desc = Object.getOwnPropertyDescriptor(obj, name); //获取指定对象的自身属性描述符 Object.defineProperty(copy, name, desc); &#125;); return copy;&#125;export const vuexToLocalStorage = store =&gt; &#123; // 当 store 初始化后调用 const savedState = ls.getItem('storeClone'); if (savedState) &#123; store.replaceState(savedState); &#125; store.subscribe((mutation, state) =&gt; &#123; // 每次 mutation 之后调用 // mutation 的格式为 &#123; type, payload &#125; let storeClone = copy(state); ls.setItem('vuex', storeClone); &#125;)&#125; store 引入后 使用 1234567export default new Vuex.Store(&#123; state, getters, actions, mutations, plugins: [vuexToLocalStorage]&#125;) 本地测试过两份数据都是刷新之后数据还保存]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Vuex</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[window.name跨域]]></title>
+    <url>%2F2017%2F07%2F24%2Fwindow-name%E8%B7%A8%E5%9F%9F%2F</url>
+    <content type="text"><![CDATA[window.name 基本原理当在浏览器中打开一个页面，或者在页面中添加一个iframe时即会创建一个对应的window对象，当页面加载另一个新的页面时，window的name属性是不会变的。这样就可以利用在页面动态添加一个iframe然后src加载数据页面，在数据页面将需要的数据赋值给window.name。然而此时承载iframe的parent页面还是不能直接访问，不在同一域下iframe的name属性，这时只需要将iframe再加载一个与承载页面同域的空白页面，即可对window.name进行数据读取 示例有三个页面： a.com/app.html：应用页面。 a.com/proxy.html：代理文件，一般是一个没有任何内容的html文件，需要和应用页面在同一域下。 b.com/data.html：应用页面需要获取数据的页面，可称为数据页面。 步骤： 在应用页面（a.com/app.html）中创建一个iframe，把其src指向数据页面（b.com/data.html）。数据页面会把数据附加到这个iframe的window.name上，data.html代码如下 1234&lt;script type="text/javascript"&gt; window.name = 'I was there!'; // 这里是要传输的数据，大小一般为2M，IE和firefox下可以大至32M左右 // 数据格式可以自定义，如json、字符串&lt;/script&gt; 在应用页面（a.com/app.html）中监听iframe的onload事件，在此事件中设置这个iframe的src指向本地域的代理文件（代理文件和应用页面在同一域下，所以可以相互通信）。app.html部分代码如下： 1234567891011121314151617181920&lt;script type="text/javascript"&gt; var state = 0, iframe = document.createElement('iframe'), loadfn = function() &#123; if (state === 1) &#123; var data = iframe.contentWindow.name; // 读取数据 alert(data); //弹出'I was there!' &#125; else if (state === 0) &#123; state = 1; iframe.contentWindow.location = "http://a.com/proxy.html"; // 设置的代理文件 &#125; &#125;; iframe.src = 'http://b.com/data.html'; if (iframe.attachEvent) &#123; iframe.attachEvent('onload', loadfn); &#125; else &#123; iframe.onload = loadfn; &#125; document.body.appendChild(iframe);&lt;/script&gt; 获取数据以后销毁这个iframe，释放内存；这也保证了安全（不被其他域frame js访问）。 12345&lt;script type="text/javascript"&gt; iframe.contentWindow.document.write(''); iframe.contentWindow.close(); document.body.removeChild(iframe);&lt;/script&gt;]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[rem布局实现思路]]></title>
+    <url>%2F2017%2F07%2F05%2Frem%E5%B8%83%E5%B1%80%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%2F</url>
+    <content type="text"><![CDATA[remcss3 中引入了新的长度单位，rem。 官方定义 font size of the root element, rem是相对单位，是相对于根元素html的font-size进行计算。 针对不同分辨率计算font-size根据浏览器界面更改html的font-size 123456789101112(function(doc, win) &#123; var docEl = doc.documentElement, resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize', recalc = function() &#123; var clientWidth = docEl.clientWidth; if (!clientWidth) return; docEl.style.fontSize = 20 * (clientWidth / 320) + 'px'; &#125;; if (!doc.addEventListener) return; win.addEventListener(resizeEvt, recalc, false); doc.addEventListener('DOMContentLoaded', recalc, false);&#125;)(document, window); 配合css预处理工具sass可以计算 rem 值12345678910111213141516//scss$hfs: 16px; //默认值可以更具需求来定义@function pxTorem($px)&#123;//$px为需要转换的字号 @return $px / $hfs * 1rem;&#125;//使用.class &#123; font-size: pxTorem(12px);&#125;//css.class &#123; font-size: 0.75rem;&#125;]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>rem</tag>
+        <tag>移动端布局</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vue生命周期]]></title>
+    <url>%2F2017%2F06%2F25%2Fvue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
+    <content type="text"><![CDATA[看了vue好长时间了，总结下vue的生命周期，以备以后查询。 在Vue的整个生命周期中，它提供了一系列的事件，可以让我们注册js方法，可以让我们达到控制整个过程的目的地，在这些事件响应方法中的this直接指向的是vue的实例。 这是一张官网上的生命周期图 生命周期钩子beforeCreate在实例初始化之后，数据观测(data observer) 和 event/watcher 事件配置之前被调用。 created实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。 beforeMount在挂载开始之前被调用：相关的 render 函数首次被调用。 mountedel 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.$el 也在文档内。 beforeUpdate数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 你可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。 updated数据更新后调用 beforeDestroyVue 实例销毁前调用，可以应用在确认是否销毁 destroyedVue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。 该钩子在服务器端渲染期间不被调用。 activatedkeep-alive 组件激活时调用,该钩子在服务器端渲染期间不被调用。 deactivatedkeep-alive 组件停用时调用,该钩子在服务器端渲染期间不被调用。 示例123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt; &lt;meta charset="utf-8"&gt; &lt;script src="https://unpkg.com/vue/dist/vue.js"&gt;&lt;/script&gt;&lt;/head&gt;&lt;body&gt; &lt;div id="app"&gt; &lt;p&gt;&#123;&#123; number &#125;&#125;&lt;/p&gt; &lt;input type="text" name="btnSetNumber" v-model="number" /&gt; &lt;/div&gt; &lt;script&gt; var app = new Vue(&#123; el: '#app', data: &#123; number: 1 &#125;, beforeCreate: function () &#123; console.log('beforeCreate 钩子执行..........................') console.log('el: ' + this.$el) console.log('data: ' + this.$data) console.log('number: ' + this.number) &#125;, created: function () &#123; console.log('created 钩子执行...........................') console.log('el: ' + this.$el) console.log('data: ' + this.$data) console.log('number: ' + this.number) &#125;, beforeMount: function () &#123; console.log('beforeMount 钩子执行...........................') console.log('el: ' + this.$el) console.log('data: ' + this.$data) console.log('number: ' + this.number) &#125;, mounted: function () &#123; console.log('mounted 钩子执行...........................') console.log('el: ' + this.$el) console.log('data: ' + this.$data) console.log('number: ' + this.number) &#125;, beforeUpdate: function () &#123; console.log('beforeUpdate 钩子执行..........................') console.log('el: ' + this.$el) console.log('data: ' + this.$data) console.log('number: ' + this.number) &#125;, updated: function () &#123; console.log('updated 钩子执行...........................') console.log('el: ' + this.$el) console.log('data: ' + this.$data) console.log('number: ' + this.number) &#125;, beforeDestroy: function () &#123; console.log('beforeDestroy 钩子执行........................') console.log('el: ' + this.$el) console.log('data: ' + this.$data) console.log('number: ' + this.number) &#125;, destroyed: function () &#123; console.log('destroyed 钩子执行........................') console.log('el: ' + this.el) console.log('data: ' + this.data) console.log('number: ' + this.number) &#125; &#125;) &lt;/script&gt;&lt;/body&gt;&lt;/html&gt; create 和 mounted 相关 update 相关 修改输入框数组 destroy 相关 参考https://cn.vuejs.org/v2/guide/instance.html#生命周期图示 https://cn.vuejs.org/v2/api/#deactivated https://segmentfault.com/a/1190000008010666]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vue.js中Class与样式绑定]]></title>
+    <url>%2F2017%2F06%2F24%2FVue-js%E4%B8%ADClass%E4%B8%8E%E6%A0%B7%E5%BC%8F%E7%BB%91%E5%AE%9A%2F</url>
+    <content type="text"><![CDATA[数据绑定一个常见需求是操作元素的 class 列表和它的内联样式。因为它们都是 attribute，我们可以用 v-bind 处理它们：只需要计算出表达式最终的字符串。不过，字符串拼接麻烦又易错。因此，在 v-bind 用于 class 和 style 时，Vue.js 专门增强了它。表达式的结果类型除了字符串之外，还可以是对象或数组。 绑定HTML Class对象语法我们可以传给v-bind:class一个对象，以动态的切换class,v-bind:class可以和普通的class属性共存 123456&lt;div class=&quot;static&quot; :class=&quot;&#123;&apos;class-a&apos;: isA, &apos;class-b&apos;: isB&#125;&quot;&gt;&lt;div&gt;data: &#123; isA: true, isB: false&#125; 渲染为： 1&lt;div class=&quot;static class-a&quot;&gt; 当isA,isB变化时class将相应的更新 也可以直接绑定数据里的一个对象 12345678&lt;div :class=&quot;classObj&quot;&gt;&lt;/div&gt;data: &#123; classObj: &#123; &apos;class-a&apos;: true, active: false &#125;&#125; 也可以在这里绑定返回对象的计算属性。这是一个常用且强大的模式 1234567891011121314&lt;div :class=&quot;classObj&quot;&gt;&lt;/div&gt;data: &#123; isActive: true, error: null&#125;,computed: &#123; classObj: function()&#123; return &#123; active: this.isActive &amp;&amp; !this.error, &apos;text-danger&apos;: this.error &amp;&amp; this.error.type === &apos;fatal&apos; &#125; &#125;&#125; 数组语法我们可以把一个数组传给 v-bind:class，以应用一个 class 列表： 123456789101112131415&lt;div v-bind:class=&quot;[activeClass, errorClass]&quot;&gt;data: &#123; activeClass: &apos;active&apos;, errorClass: &apos;text-danger&apos;&#125;//渲染为&lt;div class=&quot;active text-danger&quot;&gt;&lt;/div&gt;//三元表达式&lt;div :class=[isActive?activeClass:&apos;&apos;, errorClass]&gt;//对象语法&lt;div v-bind:class=&quot;[&#123; active: isActive &#125;, errorClass]&quot;&gt; 组件上也同样可以使用 绑定内联样式对象语法v-bind:style 的对象语法十分直观——看着非常像 CSS，其实它是一个 JavaScript 对象。CSS 属性名可以用驼峰式（camelCase）或短横分隔命名（kebab-case）： 123456&lt;div v-bind:style=&quot;&#123; color: activeColor, fontSize: fontSize + &apos;px&apos; &#125;&quot;&gt;&lt;/div&gt; data: &#123; activeColor: &apos;red&apos;, fontSize: 30&#125; 直接绑定到一个样式对象通常更好，让模板更清晰 12345678&lt;div v-bind:style=&quot;styleObject&quot;&gt;&lt;/div&gt; data: &#123; styleObject: &#123; color: &apos;red&apos;, fontSize: &apos;13px&apos; &#125;&#125; 数组语法1&lt;div v-bind:style=&quot;[baseStyles, overridingStyles]&quot;&gt;]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vue-cli中使用Sass]]></title>
+    <url>%2F2017%2F06%2F22%2Fvue-cli-%E4%B8%AD%E4%BD%BF%E7%94%A8sass%2F</url>
+    <content type="text"><![CDATA[vue-cli构建的项目中也可以使用css的预处理器，需要安装匹配的loader .vue文件中，vue-loader 允许你使用其它 Webpack loaders 处理 Vue 组件的某一部分。它会根据 lang 属性自动推断出要使用的 loaders。安装编译sass需要的loader 1npm install sass-loader node-sass --save vue文件中写法 123&lt;style lang="sass" scoped&gt; /* write sass here */&lt;/style&gt; sass-loader警告 与名称相反，sass-loader 默认解析 SCSS 语法。如果你想要使用 SASS 语法，你需要配置 vue-loader 的选项：打开webpack.base.config.js在loaders里面加上 12345678910&#123; test: /\.vue$/, loader: 'vue-loader', options: &#123; loaders: &#123; scss: 'vue-style-loader!css-loader!sass-loader', // &lt;style lang="scss"&gt; sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // &lt;style lang="sass"&gt; &#125; &#125;&#125; 这样就可以在项目中使用sass语法了 参考]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Sass</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[load()方法]]></title>
+    <url>%2F2017%2F06%2F17%2Fload-%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[load()方法load()方法分为jQuery Ajax方法和jQuery 事件方法 jQuery Ajax 的 load();1load(url, [data], [callback]) 从服务器加载数据并将返回的HTML放入匹配的元素。 url 待装入 HTML 网页网址。 发送至服务器的 key/value 数据。在jQuery 1.3中也可以接受一个字符串了。 载入成功时回调函数。 示例：123456789101112$(&quot;.flyer-layout-content&quot;).load(&quot;feeds.html&quot;);// 加载 feeds.html 文件内容。$( &quot;#result&quot; ).load( &quot;ajax/test.html&quot;, function() &#123; alert( &quot;Load was performed.&quot; );&#125;);// 回调函数$( &quot;#feeds&quot; ).load( &quot;feeds.php&quot;, &#123; limit: 25 &#125;, function() &#123; alert( &quot;The last 25 entries in the feed have been loaded&quot; );&#125;);//向服务器发出附加参数，并在服务器响应完成时执行回调 jQuery 事件的 load();当指定的元素（及子元素）已加载时，会发生 load() 事件。是这个的快捷方式.on( &quot;load&quot;, handler ). 示例：123456789$( window ).load(function() &#123; // code&#125;);$( &quot;img.userIcon&quot; ).load(function() &#123; if ( $( this ).height() &gt; 100) &#123; $( this ).addClass( &quot;bigImg&quot; ); &#125;&#125;); 参考： http://api.jquery.com/load-event/ http://api.jquery.com/load/]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[这几天工作中遇到的知识点]]></title>
+    <url>%2F2017%2F06%2F15%2F%E8%BF%99%E5%87%A0%E5%A4%A9%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[jquery中wrap(),方法包裹元素,如果传进去的是一段htmlbian片段,会查找第一个元素的子元素,一直查找到最里面的元素。]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vue-cli 项目中引用jQuery]]></title>
+    <url>%2F2017%2F05%2F29%2Fvue-cli-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E5%BC%95%E7%94%A8jQuery%2F</url>
+    <content type="text"><![CDATA[需要在vue-cli项目中引入jquery,做法 全局引入 npm下载jquery 1npm install jquery --save 在webpack.base.conf.js里加入 1var webpack = require(&quot;webpack&quot;) 在module.exports的最后加入1234567plugins: [ new webpack.optimize.CommonsChunkPlugin(&apos;common.js&apos;), new webpack.ProvidePlugin(&#123; jQuery: &quot;jquery&quot;, $: &quot;jquery&quot; &#125;)] 这样就已经全局引入了 webpack.base.conf.js的修改12345678910111213141516171819202122232425262728293031// 在开头引入webpack，后面的plugins那里需要var webpack = require('webpack')// resolvemodule.exports = &#123; // 其他代码... resolve: &#123; extensions: ['', '.js', '.vue'], fallback: [path.join(__dirname, '../node_modules')], alias: &#123; 'src': path.resolve(__dirname, '../src'), 'assets': path.resolve(__dirname, '../src/assets'), 'components': path.resolve(__dirname, '../src/components'), // webpack 使用 jQuery，如果是自行下载的 // 'jquery': path.resolve(__dirname, '../src/assets/libs/jquery/jquery.min'), // 如果使用NPM安装的jQuery 'jquery': 'jquery' &#125; &#125;, // 增加一个plugins plugins: [ new webpack.ProvidePlugin(&#123; $: "jquery", jQuery: "jquery" &#125;) ], // 其他代码...&#125; 装上之后效果]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>jQuery</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[VSCode一些使用技巧]]></title>
+    <url>%2F2017%2F04%2F01%2FVS%20code%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%2F</url>
+    <content type="text"><![CDATA[最开始使用的编辑器是Atom，但有一段时间只要打开jQuery源码就挂掉，直接卡死，在公司的电脑和自己的电脑上都是如此，卸载重新安装也不行，只好换编辑器，之后也下载了传说中的神器Sublime Text3，但也没装什么插件，就换成了WebStorm，IDE果然很强大，一直用着，老大开始推VS code，就安装下来，试着用了一下，顺便记录一些插件在换机器的时候备用。 安装直接网站下载安装 Visual Studio Code 简介 VScode是微软推出的一款轻量级的编辑器,采用了和VS相同的UI界面。 左侧是用于展示所要编辑的所有文件和文件夹的文件管理器，依次是资源管理器，搜索，GIT，调试，插件，右侧是打开文件的编辑区域，最多可同时打开三个编辑区域到侧边。 底栏部依次是Git Branch，error&amp;warning，编码格式等。 插件 VScode-icons: 美化VSCode的界面，在文件名前面显示小图标，安装后每次打开自动启用。 Git Easy: 增加了vscode中自带的git操作，安装后按F1调出控制台，输入git easy [options]完成git操作，代替git bash。 Debugger for Chrome: 方便js调试的插件，前端项目在Chrome中运行起来之后，可以直接在VSCode中打断点、查看输出、查看控制台，需要配置launch.json,详情见插件说明。 vue 2 Snippets: Vue文件高亮 View In Browser: 从浏览器中查看html文件，使用系统的当前默认浏览器,只支持html文件,默认的快捷键Ctrl+F1 Material-theme: 我觉的还好的主题吧 其他的一些插件 jQuery Code Snippets：juqery提示插件 Path Intellisense：自动路劲补全，默认不带这个功能的 HTML Snippets：支持HTML5的标签提示 HTML CSS support：css自动补齐 ESLint：检测JS background：可以自己设置vsc的背景图 Bootstrap 3 Snippets：bootstrap必备 常用快捷键打开一个新窗口： Ctrl+Shift+N 关闭窗口： Ctrl+Shift+W 新建文件 Ctrl+N 历史打开文件之间切换 Ctrl+Tab，Alt+Left，Alt+Right 切出一个新的编辑器（最多3个）Ctrl+\，也可以按住Ctrl鼠标点击Explorer里的文件名 左中右3个编辑器的快捷键Ctrl+1 Ctrl+2 Ctrl+3 3个编辑器之间循环切换 Ctrl+` 编辑器换位置，Ctrl+k然后按Left或Right 格式调整 代码行缩进Ctrl+[， Ctrl+] 折叠打开代码块 Ctrl+Shift+[， Ctrl+Shift+] Ctrl+C Ctrl+V如果不选中，默认复制或剪切一整行 代码格式化：Shift+Alt+F，或Ctrl+Shift+P后输入format code 修剪空格Ctrl+Shift+X 上下移动一行： Alt+Up 或 Alt+Down 向上向下复制一行： Shift+Alt+Up或Shift+Alt+Down 在当前行下边插入一行Ctrl+Enter 在当前行上方插入一行Ctrl+Shift+Enter 光标相关 移动到行首：Home 移动到行尾：End 移动到文件结尾：Ctrl+End 移动到文件开头：Ctrl+Home 移动到后半个括号 Ctrl+Shift+] 选中当前行Ctrl+i（双击） 选择从光标到行尾Shift+End 选择从行首到光标处Shift+Home 删除光标右侧的所有字Ctrl+Delete Shrink/expand selection： Shift+Alt+Left和Shift+Alt+Right Multi-Cursor：可以连续选择多处，然后一起修改，Alt+Click添加cursor或者Ctrl+Alt+Down 或 Ctrl+Alt+Up 同时选中所有匹配的Ctrl+Shift+L Ctrl+D下一个匹配的也被选中(被我自定义成删除当前行了，见下边Ctrl+Shift+K) 回退上一个光标操作Ctrl+U 重构代码 跳转到定义处：F12 定义处缩略图：只看一眼而不跳转过去Alt+F12 列出所有的引用：Shift+F12 同时修改本文件中所有匹配的：Ctrl+F12 重命名：比如要修改一个方法名，可以选中后按F2，输入新的名字，回车，会发现所有的文件都修改过了。 跳转到下一个Error或Warning：当有多个错误时可以按F8逐个跳转 查看diff 在explorer里选择文件右键 Set file to compare，然后需要对比的文件上右键选择Compare with &apos;file_name_you_chose&apos;. 查找替换 查找 Ctrl+F 查找替换 Ctrl+H 整个文件夹中查找 Ctrl+Shift+F 全屏：F11 zoomIn/zoomOut：Ctrl + =/Ctrl + - 侧边栏显/隐：Ctrl+B 预览markdown Ctrl+Shift+V ### 相关文档 官方文档（英文版）：code.visualstudio.com/docs 中文文档：VScode中文文档 扩展：扩展]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[json-server模拟数据]]></title>
+    <url>%2F2017%2F03%2F31%2Fjson-server%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%2F</url>
+    <content type="text"><![CDATA[json-server可以模拟后端提供的数据，让前端流程走通，实现前后端分离 安装npm isntall json-server --save-dev 使用// server.js const jsonServer = require(&apos;json-server&apos;) const server = jsonServer.create() const router = jsonServer.router(&apos;db.json&apos;) const middlewares = jsonServer.defaults() server.use(middlewares) server.use(router) server.listen(3000, () =&gt; { console.log(&apos;JSON Server is running&apos;) }) 创建db.json文件{ &quot;posts&quot;: [ { &quot;id&quot;: 1, &quot;title&quot;: &quot;json-server&quot;, &quot;author&quot;: &quot;typicode&quot; } ], &quot;comments&quot;: [ { &quot;id&quot;: 1, &quot;body&quot;: &quot;some comment&quot;, &quot;postId&quot;: 1 } ], &quot;profile&quot;: { &quot;name&quot;: &quot;typicode&quot; } } 创建后 代理 链接json-server]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[vue-resource实现Ajax获取数据]]></title>
+    <url>%2F2017%2F03%2F31%2Fvue-resource%E5%AE%9E%E7%8E%B0Ajax%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%2F</url>
+    <content type="text"><![CDATA[vue-resource是Vue提供的Ajax请求插件 安装npm install vue-resource 引入import VueResource from &apos;vue-resource&apos; Vue.use(VueResource) 使用1234567// GET /someUrlthis.$http.get('/someUrl').then(response =&gt; &#123; // get body data this.someData = response.body; &#125;, response =&gt; &#123; // error callback &#125;); 更新vue官方推荐使用axio，请查看。 链接 vue-resource Vue-resource实现ajax请求和跨域请求]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[一些面试题]]></title>
+    <url>%2F2017%2F03%2F29%2F%E8%AE%B0%E4%B8%80%E6%AC%A1%E9%9D%A2%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[CSS中position几个值的运用absolute:生成绝对定位，相对于第一个position的值不为static的父元素定位。 relative:生成相对定位，相对于其正常位置进行定位。 fixed:生成绝对定位，相对于浏览器窗口进行定位。 static:默认值。没有定位，忽略(top,right,left,bottom,z-index声明） inherit:从父元素中继承 什么是原型链每个对象都会在其内部初始化一个属性，就是prototype(原型)，当我们访问一个对象的属性时， 如果这个对象内部不存在这个属性，那么他就会去prototype里找这个属性，这个prototype又会有自己的prototype， 于是就这样一直找下去，也就是我们平时所说的原型链的概念。 关系：instance.constructor.prototype = instance.__proto__ 特点： JavaScript对象是通过引用来传递的，我们创建的每个新对象实体中并没有一份属于自己的原型副本。当我们修改原型时，与之相关的对象也会继承这一改变。 当我们需要一个属性的时，Javascript引擎会先看当前对象中是否有这个属性， 如果没有的话， 就会查找他的Prototype对象是否有这个属性，如此递推下去，一直检索到 Object 内建对象。 function Func(){} Func.prototype.name = &quot;Sean&quot;; Func.prototype.getInfo = function() { return this.name; } var person = new Func();//现在可以参考var person = Object.create(oldObject); console.log(person.getInfo());//它拥有了Func的属性和方法 //&quot;Sean&quot; console.log(Func.prototype); // Func { name=&quot;Sean&quot;, getInfo=function()} 雪碧图原生JS与jQuery中load事件的区别CSS3 border-radiusCSS3 阴影ShadowArray常用的方法push()方法用于在数组的末端添加一个或多个元素，并返回添加新元素后的数组长度。 pop()方法用于删除数组的最后一个元素，并返回该元素。注意，该方法会改变原数组。 slice()方法用于提取原数组的一部分，返回一个新数组，原数组不变。 它的第一个参数为起始位置（从0开始），第二个参数为终止位置（但该位置的元素本身不包括在内）。如果省略第二个参数，则一直返回到原数组的最后一个成员。]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HEXO搭建个人博客]]></title>
+    <url>%2F2017%2F03%2F27%2FHEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%2F</url>
+    <content type="text"><![CDATA[突然心血来潮，想搭建一个博客，就在网上查了一些资料，决定用hexo+Github来搭建。记录一下搭建过程。 安装前提确保电脑安装下列程序： Node.js Git 安装Hexo输入下面命令安装Hexo1npm install -g hexo-cli 建站输入下面命令初始化 hexo init &lt;folder&gt; cd &lt;folder&gt; npm install 新建完成后的文件夹目录 生成静态文件 hexo generate 启动本地服务器，进行文章调试预览 hexo server 浏览器中输入http://localhost:4000 预览 部署安装hexo-deployer-git。 npm install hexo-deployer-git --save 修改_config.yml配置 deploy: type: git repo: &lt;repository url&gt; //库（Repository）地址 branch: [branch] message: [message] 部署 hexo deploy 每次部署步骤 hexo clean hexo generate hexo deploy 一些常用命令 hexo new &quot;postName&quot; #新建文章 hexo new page &quot;pageName&quot; #新建页面 hexo generate #生成静态页面至public目录 hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server） hexo deploy #将.deploy目录部署到GitHub hexo help #查看帮助 hexo version #查看Hexo的版本 修改主题下载 $ git clone https://github.com/giscafer/hexo-theme-cafe.git themes/cafe 使用 修改博客配置文件 `_config.yml` 主题属性 theme 为 `cafe`. 更新升级 cd themes/cafe git pull 踩到得坑刚开始用markdown语法插入图片，但是只能在文章中查看到正确的图片，首页无法显示图片，查了下官网文档，可以用1&#123;% asset_img 1.png 文件夹目录%&#125; 来插入图片，这样都会显示正常]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Tools</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[三栏布局]]></title>
+    <url>%2F2016%2F07%2F13%2F%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80%2F</url>
+    <content type="text"><![CDATA[负边距在让元素产生偏移和 position:relative的区别负margin会使相邻的浮动元素后inline-block元素产生偏移，而position:relative则不会影响。 使用负margin形成三栏布局的条件？ 三栏全部浮动。 渲染顺序为中左右。 左右栏宽度固定。 圣杯布局使用负margin使浮动元素上移，父容器加padding实现。 设置三栏元素浮动； 用负margin是左右两栏上移，左边栏margin-left设置-100%，右边栏设置margin-left为负的自身宽度。 父容器设置padding为左右两栏固定宽度，使父容器撑大。 使用position:relative调整左右两栏位置。 圣杯两栏布局12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970&lt;!DOCTYPE html&gt;&lt;html&gt; &lt;head&gt; &lt;meta charset="utf-8"&gt; &lt;title&gt;圣杯两栏布局&lt;/title&gt; &lt;style type="text/css"&gt; html,body&#123; margin: 0; padding: 0; &#125; body&#123; font-family: '微软雅黑'; &#125; #header,#footer&#123; height: 30px; background-color: #ccc; &#125; .clearfix:after&#123; content: ''; display: block; clear: both; &#125; .aside&#123; width: 200px; height: 300px; background-color: red; float: left; margin-left: -100%; position: relative; left: -200px; &#125; .main&#123; background-color: green; float: left; &#125; #content&#123; padding: 0 0 0 200px; &#125; .btn-ct&#123; height: 130px; text-align: center; padding: 30px 10px 10px 10px; &#125; .btn-ct p&#123; font-size: 25px; &#125; .btn-ct .btn&#123; padding: 10px 10px; border-radius: 4px; cursor: pointer; &#125; &lt;/style&gt; &lt;/head&gt; &lt;body&gt; &lt;div id="header"&gt;头部&lt;/div&gt; &lt;div id="content" class="clearfix"&gt; &lt;div class="main"&gt; 圣杯布局值两边顶宽，中间自适应的三栏布局，中间栏要放在文档流前面以优先渲染。参 考：&lt;a href="#"&gt;圣杯布局原理。&lt;/a&gt;其流程为：1）设置container的左右padding，用于预留 左右边栏的空间。2）给所有元素设置浮动和定位，用于设置左右两栏偏移；3）给左边栏设置right， 让其移动位置，设置负边距100%（#centent的宽度）让其跑到上面，4）给右边栏设置负边距让其 跑到上边。 &lt;/div&gt; &lt;div class="aside"&gt; 左侧边栏，宽度固定 &lt;/div&gt; &lt;/div&gt; &lt;div id="footer"&gt;尾部&lt;/div&gt; &lt;/body&gt;&lt;/html&gt; 渲染为 圣杯三栏布局12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788&lt;style type="text/css"&gt; html,body&#123; margin: 0; padding: 0; &#125; body&#123; font-family: '微软雅黑'; &#125; #header&#123; height: 30px; background-color: #ccc; &#125; #footer&#123; height: 30px; background-color: #ccc; &#125; #content:after&#123; content:''; display: block; clear: both; &#125; #content&#123; padding: 0 200px; &#125; .left&#123; width: 200px; height: 300px; float: left; background-color: red; margin-left: -100%; position: relative; left: -200px; &#125; .main&#123; float: left; background-color: green; &#125; .right&#123; height: 300px; width: 200px; float: left; background-color: yellow; margin-left: -200px; position: relative; left: 200px; &#125; .btn-ct&#123; height: 130px; text-align: center; padding: 30px 10px 10px 10px; &#125; .btn-ct p&#123; font-size: 25px; &#125; .btn-ct .btn&#123; padding: 10px 10px; border-radius: 4px; cursor: pointer; &#125; &lt;/style&gt; &lt;/head&gt; &lt;body&gt; &lt;div id="header"&gt; 头部 &lt;/div&gt; &lt;div id="content"&gt; &lt;div class="main"&gt; &lt;p&gt; 圣杯布局值两边顶宽，中间自适应的三栏布局，中间栏要放在文档流前面以优先渲染。参 考：&lt;a href="#"&gt;圣杯布局原理。&lt;/a&gt;其流程为：1）设置container的左右padding，用于预留 左右边栏的空间。2）给所有元素设置浮动和定位，用于设置左右两栏偏移；3）给左边栏设置right， 让其移动位置，设置负边距100%（#centent的宽度）让其跑到上面，4）给右边栏设置负边距让其 跑到上边。 &lt;/p&gt; &lt;/div&gt; &lt;div class="left"&gt; &lt;p&gt;左侧边栏，宽度固定。&lt;/p&gt; &lt;/div&gt; &lt;div class="right"&gt; &lt;p&gt;右侧边栏，宽度固定。&lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id="footer"&gt; 尾部 &lt;/div&gt; &lt;/body&gt; 渲染为: 双飞翼布局在圣杯布局的基础上，不再设置父容器padding撑开宽度，在中间栏建一个字div，设置盒子的margin实现。 设置三栏元素浮动； 用负margin是左右两栏上移，左边栏margin-left设置-100%，右边栏设置margin-left为负的自身宽度。 在主栏里面再加上一个子div。在子div里面设置左右margin的值(大于等于左右两栏的宽度) 。 双飞翼两栏12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667&lt;!DOCTYPE html&gt;&lt;html&gt; &lt;head&gt; &lt;meta charset="utf-8"&gt; &lt;title&gt;双飞翼两栏布局&lt;/title&gt; &lt;style type="text/css"&gt; html,body&#123; margin: 0; padding: 0; &#125; body&#123; font-family: '微软雅黑'; &#125; #header,#footer&#123; height: 30px; background-color: #ccc; &#125; .main&#123; float: left; width: 100%; &#125; .wrap&#123; margin-right: 200px; background-color: green; &#125; .ad&#123; float: left; width: 200px; height: 150px; background-color: yellow; margin-left: -200px; &#125; #content:after&#123; content:''; display: block; clear: both; &#125; .btn-ct&#123; height: 130px; text-align: center; padding: 30px 10px 10px 10px; &#125; .btn-ct p&#123; font-size: 25px; &#125; .btn-ct .btn&#123; padding: 10px 10px; border-radius: 4px; cursor: pointer; &#125; &lt;/style&gt; &lt;/head&gt; &lt;body&gt; &lt;div id="header"&gt;头部&lt;/div&gt; &lt;div id="content"&gt; &lt;div class="main"&gt; &lt;div class="wrap"&gt; 双飞翼布局指两边顶宽，中间自适应的三栏布局，中间流要放在文档前面以优先渲染。 &lt;/div&gt; &lt;/div&gt; &lt;div class="ad"&gt; 右侧边栏，固定宽度 &lt;/div&gt; &lt;/div&gt; &lt;div id="footer"&gt;尾部&lt;/div&gt; &lt;/body&gt;&lt;/html&gt; 渲染为： 双飞翼三栏123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778&lt;!DOCTYPE html&gt;&lt;html&gt; &lt;head&gt; &lt;meta charset="utf-8"&gt; &lt;title&gt;双飞翼三栏布局&lt;/title&gt; &lt;style type="text/css"&gt; html,body&#123; margin: 0; padding: 0; &#125; body&#123; font-family: '微软雅黑'; &#125; #header,#footer&#123; height: 30px; background-color: #ccc; &#125; .main&#123; float: left; width: 100%; &#125; .wrap&#123; margin: 0 200px; background-color: green; &#125; .aside&#123; float: left; width: 200px; height: 150px; background-color: red; margin-left: -100%; &#125; .ad&#123; float: left; width: 200px; height: 150px; background-color: yellow; margin-left: -200px; &#125; #content:after&#123; content:''; display: block; clear: both; &#125; .btn-ct&#123; height: 130px; text-align: center; padding: 30px 10px 10px 10px; &#125; .btn-ct p&#123; font-size: 25px; &#125; .btn-ct .btn&#123; padding: 10px 10px; border-radius: 4px; cursor: pointer; &#125; &lt;/style&gt; &lt;/head&gt; &lt;body&gt; &lt;div id="header"&gt;头部&lt;/div&gt; &lt;div id="content"&gt; &lt;div class="main"&gt; &lt;div class="wrap"&gt; 双飞翼布局指两边顶宽，中间自适应的三栏布局，中间流要放在文档前面以优先渲染。 &lt;/div&gt; &lt;/div&gt; &lt;div class="aside"&gt; 左侧边栏，固定宽度 &lt;/div&gt; &lt;div class="ad"&gt; 右侧边栏，固定宽度 &lt;/div&gt; &lt;/div&gt; &lt;div id="footer"&gt;尾部&lt;/div&gt; &lt;/body&gt;&lt;/html&gt; 渲染为：]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>三栏布局</tag>
+        <tag>圣杯布局</tag>
+        <tag>双飞翼布局</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[边距合并]]></title>
+    <url>%2F2016%2F07%2F10%2F%E8%BE%B9%E8%B7%9D%E5%90%88%E5%B9%B6%2F</url>
+    <content type="text"><![CDATA[边距合并同一文档流中的两个相邻块级元素，会出现外边距合并。 上下两个块级元素 父子元素的外边距合并。 空元素外边据也会合并。 不让相邻元素外距合并。 border和padding是不让父子元素外边距合并。 在子元素外面套一个div，变成各自独立的空间，就可以避免相邻的元素margin合并，加白色边框。 去除inline-block内缝隙的几种方法 在html里面将标签之间的空格去掉。 浮动。 负margin。 直接父元素的font-size设置为0(文本之间没有空隙)，在子元素上面设置font-size。 父容器使用overflow: auto| hidden撑开高度的原理overflow: auto| hidden是将父容器转变为一个BFC。在BFC的特性使得其包裹浮动元素。 深入理解CSS溢出overflow BFC是什么，以及作用BFC是独立的布局环境，BFC中的元素的布局是不受外界的影响（我们往往利用这个特性来消除浮动元素对其非浮动的兄弟元素和其子元素带来的影响。）并且在一个BFC中，块盒与行盒（行盒由一行中所有的内联元素所组成）都会垂直的沿着其父元素的边框排列。 形成BFC 设置float，值不为”none” 设置overflow，值不为”visible”（hidden，auto，scroll） 设置display的值为 “table-cell”, “table-caption”,或 “inline-block” 设置position，值不为 “static” 或 “relative”（absolute，fixed） 作用：清除浮动，使外边距不发生合并 浮动导致的父容器高度塌陷指什么？为什么会产生？有几种解决方法?浮动导致的父容器高度塌陷是指元素设置了浮动属性后在父级元素内脱离文档流不再占据文档流空间，父级元素感知不到已设置浮动的子元素，认为自己内部没有元素而无法撑开宽高的情况。 给父容器最后增加一个空元素，设置clear：both；属性清除浮动，因为空元素存在于正常文档流中所以父容器可以感知到这个空元素并且被空元素撑开。 给父容器设置overflow：auto/hidden,float:left/right, display:inline-block/table, position: absolute/fixed,属性，使父容器形成BFC空间。 清除浮动 以上方法可以在父容器的最后添加一个内容为空存在与文档流中并且清除左右浮动的元素。父容器将会感知到这个空元素并且把自身空间撑开。 BFC撑开空间是使父容器本身形成一个可以包含浮动元素的独立的空间，上述方法只是撑开了内容。]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>BFC</tag>
+        <tag>Float</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[浮动，定位]]></title>
+    <url>%2F2016%2F07%2F05%2F%E6%B5%AE%E5%8A%A8%EF%BC%8C%E5%AE%9A%E4%BD%8D%2F</url>
+    <content type="text"><![CDATA[文档流的概念，有那种方式可以让元素脱离文档流。文档流指的是浏览器在渲染页面时，是根据元素在HTML文档中的位置顺序决定排布过程，行内元素从左向右，块级元素从上向下排列。脱离文档流的两种方式： 浮动float，float:left|right;left左浮动，right右浮动。 定位position，position:absolute|fixed; 有几种定位方式，分别是如何实现定位的以及使用场景。使用position属性，有四种不同类型的定位。 static:元素框正常生成，按照文档流默认的显示位置定位，无法通过top,bottom,right,left值定位，z-index值无效。 relative:相对定位，不脱离文档流相对于自身原始位置进行定位。可以通过top,bottom,roght,left的值进行定位，z-index可以控制元素的优先级。 absolute：绝对定位，脱离文档流，相对于父容器父父容器或者Body定位。 fixed:相对于浏览器的窗口进行定位，脱离文档流，多用于广告浮窗等。 absolute,relative,fixed偏移的参考点 fixed是根据窗口本身进行定位； relative是根据自己原来的位置进行定位； absolute是根据加了relative的父元素后者body定位； z-index的作用z-index 属性设置元素的堆叠顺序。拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面。 position:relative和负margin都可以使元素位置发生偏移，其中的区别 position:relative作用于一个元素进行位置偏移，而不会影响其他元素。 负margin是调整外边距会影响到周围元素的布局和位置。 一个固定宽高的元素在页面上垂直水平剧中利用绝对定位进行水平居中。上下各50%，子元素左上角根据父容器定位。然后用-margin的一半。 浮动元素的特征，对其他浮动元素，普通元素，文字分别的影响？浮动元素脱离了文档流。 对其他浮动元素，其他浮动元素会紧随在浮动元素之后浮动。 对于普通元素:浮动元素脱离了文档流,其他的块级元素会填充浮动元素的位置,好像根本就没有浮动元素一样.但是块元素会在浮动元素的下面,行内元素和块元素中的行内内容会考虑浮动元素的边界,因此会围绕着浮动元素。 对于文字:文字可以看成是块元素行内部分,他们会围绕着浮动元素。 清除浮动父容器无法包裹浮动元素，并且浮动元素对文字排版产生影响 。在父容器上面添加以下内容，清除浮动,任何地方有浮动元素在其父容器一定要添加clearfix，防患于未然。 12345.clearfix:after&#123; content:&apos;&apos;; display:block; clear:both; &#125; 参考MDN-Web技术文档-CSS]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>浮动</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CSS常见技巧]]></title>
+    <url>%2F2016%2F06%2F26%2Fcss%E5%B8%B8%E8%A7%81%E6%8A%80%E5%B7%A7%2F</url>
+    <content type="text"><![CDATA[CSS Sprite(雪碧图|精灵图)雪碧图指将许多很小的icon合成一张大图，通过background-position去定位不同的图片来展示不同的icon。 img标签和CSS背景使用图片在使用场景页面上固定不变的图片使用CSS背景图，对于可变的内容，图片是和内容相关的使用img图片（验证码，用户头像，广告图片等）。 title和alt属性作用 title是鼠标悬浮停留时出现的文字提示。 alt是图片链接打不开时替换成的文字，对搜索引擎优化有好处。 background:url(abc.png) o o no-repeat;以abc.png为背景图片，位置不偏移，图片不重复。 background-sizebackground-size规定背景图片的尺寸。 cover 把背景图像扩展至足够大，以使背景图像完全覆盖背景区域。背景图像的某些部分也许无法显示在背景定位区域中。 contain 把图像图像扩展至最大尺寸，以使其宽度和高度完全适应内容区域。 px 给背景图片制定宽高。 百分比 原图像大小的倍数。 div水平居中,图片水平居中 div 水平居中 margin:0 auto; text-align：center设置在图片的父容器上使得图片水平居中 opacity和ragb都可以设置透明度，他们的区别opacity使元素整体透明，是元素的属性；rgba将颜色设置为透明，是颜色的属性，不涉及子元素。]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Git 常用命令]]></title>
+    <url>%2F2016%2F06%2F16%2Fgit-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[新建代码库12345678# 在当前目录新建一个Git代码库$ git init# 新建一个目录，将其初始化为Git代码库$ git init [project-name]# 下载一个项目和它的整个代码历史$ git clone [url] 配置123456789# 显示当前的Git配置$ git config --list# 编辑Git配置文件$ git config -e [--global]# 设置提交代码时的用户信息$ git config [--global] user.name &quot;[name]&quot;$ git config [--global] user.email &quot;[email address]&quot; 增加/删除文件123456789101112131415161718192021# 添加指定文件到暂存区$ git add [file1] [file2] ...# 添加指定目录到暂存区，包括子目录$ git add [dir]# 添加当前目录的所有文件到暂存区$ git add .# 添加每个变化前，都会要求确认# 对于同一个文件的多处变化，可以实现分次提交$ git add -p# 删除工作区文件，并且将这次删除放入暂存区$ git rm [file1] [file2] ...# 停止追踪指定文件，但该文件会保留在工作区$ git rm --cached [file]# 改名文件，并且将这个改名放入暂存区$ git mv [file-original] [file-renamed] 代码提交123456789101112131415161718# 提交暂存区到仓库区$ git commit -m [message]# 提交暂存区的指定文件到仓库区$ git commit [file1] [file2] ... -m [message]# 提交工作区自上次commit之后的变化，直接到仓库区$ git commit -a# 提交时显示所有diff信息$ git commit -v# 使用一次新的commit，替代上一次提交# 如果代码没有任何新变化，则用来改写上一次commit的提交信息$ git commit --amend -m [message]# 重做上一次commit，并包括指定文件的新变化$ git commit --amend [file1] [file2] ... 分支12345678910111213141516171819202122232425262728293031323334353637383940414243# 列出所有本地分支$ git branch# 列出所有远程分支$ git branch -r# 列出所有本地分支和远程分支$ git branch -a# 新建一个分支，但依然停留在当前分支$ git branch [branch-name]# 新建一个分支，并切换到该分支$ git checkout -b [branch]# 新建一个分支，指向指定commit$ git branch [branch] [commit]# 新建一个分支，与指定的远程分支建立追踪关系$ git branch --track [branch] [remote-branch]# 切换到指定分支，并更新工作区$ git checkout [branch-name]# 切换到上一个分支$ git checkout -# 建立追踪关系，在现有分支与指定的远程分支之间$ git branch --set-upstream [branch] [remote-branch]# 合并指定分支到当前分支$ git merge [branch]# 选择一个commit，合并进当前分支$ git cherry-pick [commit]# 删除分支$ git branch -d [branch-name]# 删除远程分支$ git push origin --delete [branch-name]$ git branch -dr [remote/branch] 标签1234567891011121314151617181920212223242526# 列出所有tag$ git tag# 新建一个tag在当前commit$ git tag [tag]# 新建一个tag在指定commit$ git tag [tag] [commit]# 删除本地tag$ git tag -d [tag]# 删除远程tag$ git push origin :refs/tags/[tagName]# 查看tag信息$ git show [tag]# 提交指定tag$ git push [remote] [tag]# 提交所有tag$ git push [remote] --tags# 新建一个分支，指向某个tag$ git checkout -b [branch] [tag] 查看信息123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960# 显示有变更的文件$ git status# 显示当前分支的版本历史$ git log# 显示commit历史，以及每次commit发生变更的文件$ git log --stat# 搜索提交历史，根据关键词$ git log -S [keyword]# 显示某个commit之后的所有变动，每个commit占据一行$ git log [tag] HEAD --pretty=format:%s# 显示某个commit之后的所有变动，其&quot;提交说明&quot;必须符合搜索条件$ git log [tag] HEAD --grep feature# 显示某个文件的版本历史，包括文件改名$ git log --follow [file]$ git whatchanged [file]# 显示指定文件相关的每一次diff$ git log -p [file]# 显示过去5次提交$ git log -5 --pretty --oneline# 显示所有提交过的用户，按提交次数排序$ git shortlog -sn# 显示指定文件是什么人在什么时间修改过$ git blame [file]# 显示暂存区和工作区的差异$ git diff# 显示暂存区和上一个commit的差异$ git diff --cached [file]# 显示工作区与当前分支最新commit之间的差异$ git diff HEAD# 显示两次提交之间的差异$ git diff [first-branch]...[second-branch]# 显示今天你写了多少行代码$ git diff --shortstat &quot;@&#123;0 day ago&#125;&quot;# 显示某次提交的元数据和内容变化$ git show [commit]# 显示某次提交发生变化的文件$ git show --name-only [commit]# 显示某次提交时，某个文件的内容$ git show [commit]:[filename]# 显示当前分支的最近几次提交$ git reflog 远程同步1234567891011121314151617181920212223# 下载远程仓库的所有变动$ git fetch [remote]# 显示所有远程仓库$ git remote -v# 显示某个远程仓库的信息$ git remote show [remote]# 增加一个新的远程仓库，并命名$ git remote add [shortname] [url]# 取回远程仓库的变化，并与本地分支合并$ git pull [remote] [branch]# 上传本地指定分支到远程仓库$ git push [remote] [branch]# 强行推送当前分支到远程仓库，即使有冲突$ git push [remote] --force# 推送所有分支到远程仓库$ git push [remote] --all 撤销12345678910111213141516171819202122232425262728293031# 恢复暂存区的指定文件到工作区$ git checkout [file]# 恢复某个commit的指定文件到暂存区和工作区$ git checkout [commit] [file]# 恢复暂存区的所有文件到工作区$ git checkout .# 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变$ git reset [file]# 重置暂存区与工作区，与上一次commit保持一致$ git reset --hard# 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变$ git reset [commit]# 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致$ git reset --hard [commit]# 重置当前HEAD为指定commit，但保持暂存区和工作区不变$ git reset --keep [commit]# 新建一个commit，用来撤销指定commit# 后者的所有变化都将被前者抵消，并且应用到当前分支$ git revert [commit]# 暂时将未提交的变化移除，稍后再移入$ git stash$ git stash pop 其他12345# 生成一个可供发布的压缩包$ git archive# git 无法添加文件夹下的文件(解决,如果文件夹中有.git配置文件，需要删除)$ git rm --cached folder$ git add folder 参考githubgit 命令]]></content>
+      <categories>
+        <category>Tools</category>
+      </categories>
+      <tags>
+        <tag>Tools</tag>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[盒模型]]></title>
+    <url>%2F2016%2F06%2F13%2F%E7%9B%92%E6%A8%A1%E5%9E%8B%2F</url>
+    <content type="text"><![CDATA[盒模型包括那些属性内边距padding，边框border，外边距margin和实际内容。 IE盒模型和W3C盒模型有什么区别？ie678怪异模式（不加DOCTYPE）使用IE盒模型，宽度=边框+padding+内容。 box-sizing的作用box-sizing 属性用于更改用于计算元素宽度和高度的默认的 CSS 盒子模型。可以使用此属性来模拟不正确支持CSS盒子模型规范的浏览器的行为。 12345678/* 关键字 值 */box-sizing: content-box;box-sizing: border-box;/* 全局 值 */box-sizing: inherit;box-sizing: initial;box-sizing: unset; content-box 默认值，标准盒子模型。 width 与 height 只包括内容的宽和高， 不包括边框（border），内边距（padding），外边距（margin）。注意: 内边距, 边框 &amp; 外边距 都在这个盒子的外部。 尺寸计算公式：width = 内容的宽度，height = 内容的高度。宽度和高度都不包含内容的边框（border）和内边距（padding）。 border-box width 和 height 属性包括内容，内边距和边框，但不包括外边距。这是当文档处于 Quirks模式 时Internet Explorer使用的盒模型。注意，填充和边框将在盒子内。 这里的维度计算为：width = border + padding + 内容的 width，height = border + padding + 内容的 height 参考MDN box-sizing]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CSS选择器]]></title>
+    <url>%2F2016%2F06%2F06%2Fcss%E9%80%89%E6%8B%A9%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[常见的css选择器 *通用元素选择器 123* &#123; font-size:14px;&#125; #idid选择器,匹配特定的id元素 123#id&#123; color:red:&#125; .class类选择器，匹配特定类的元素 123.class&#123; background-color:blue;&#125; element 标签选择器 123p&#123; line-height:20px;&#125; 组合选择器 属性选择器 伪类选择器 选择器的优先级 优先级从高到低分别为 在属性后面使用!important会覆盖页面内任何位置定义的元素样式 作为style属性写在元素标签的内联样式 id选择器 类选择器 伪类选择器 属性选择器 标签选择器 通配符选择器 浏览器默认 多个选择器时,对每个选择器的优先权值做加法运算 权重高的优先 相等时后面的优先 class和id的使用场景 id 页面中是独一无二的使用，例如页脚等 class 一些有相同的特定样式的标签，可以给他们添加一个同样的class，将相同的部分定义出来。 使用css选择器时为什么要划定适当的命名空间 更好的匹配需要特定匹配的元素，避免样式污染，使后期的维护更加容易 以下选择器的意思？ #header{} id选择器，选择为id名为header的元素。 .header{} class选择器，选择class名为header的元素。 .header .logo{} 选择class名为header的元素中class名为logo的子元素。 .header.mobile{}选择class为header和mobile的元素。 .header p, .header h3{}选择class为header的子元素p和h3元素。 #header .nav&gt;li{}选择id为header的元素中class为nav的元素的直接子元素li。 #header a:hover{} 选择id为header的元素中啊标签鼠标悬停时的样式。 列出你知道的伪类选择器？ E:hover 匹配鼠标悬停其上的E元素。 E:active 匹配鼠标已经在其上按下还没有放手的E元素。 E:focus 匹配获得当前焦点的E元素。 E:link 匹配所有未被点击的链接。 E:visited 匹配所有已经被点击的链接。 :first-child和:first-of-type的作用和区别 :first-child 匹配父元素下的第一个子元素。 :first-of-type 匹配父元素下同种标签的第一个子元素。 text-align:center的作用 定义行内内容（例如文字、span元素）如何相对它的块父元素对齐。作用是将文本在水平方向上居中。作用在块级元素上，让行内元素水平居中。]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HTML查漏补缺（四）]]></title>
+    <url>%2F2016%2F06%2F03%2Fhtml%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA%EF%BC%88%E5%9B%9B%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[有序列表、无序列表、自定义列表在语义上的区别 有序列表，使用数字标记项目 无序列表，使用黑点标记项目 自定义列表，用来定义和解释的列表 有序列表适合各项目之间有顺序关系的情况，无序列表适用于各项目之间没有顺序关系的情况，自定义列表适用于表示项目和其注释的组合。无序列表是使用最多的一种。 如何去除列表的默认样式 123li&#123; list-style:none;&#125; class 和 id 在语义上的区别 class 是描述元素的身份的属性，同一个页面上不同元素可以命名为同一个class的属性名，在CSS中我们可以用.加上class属性名选择同一属性名的元素，进行样式设计。 id 是描述元素唯一标识的属性，在同一个html文件中只有一个，是独一无二的。在CSS中可以用#加上id名选择这个元素。 块级元素、行内元素的区别 块级元素，上下都有换行，排列时是向下排列，独自占一行。 行内元素，行内元素可以与其他行内元素排列在同一行，排列时是从左向右排列，只有在空间位置不够时才会换行。 块级元素可以设padding margin width height 。行内元素设width 和 height是无效的，而设padding和margin时，左右是有效的，而上下是没有效果的。 display:block、display:inline和display:inline-block的作用 dispaly:block将元素显示为块级元素。 siaplay:inline将元素显示为行内元素。 display:block-inline将元素显示为行内块元素，不换行也具有块级元素的属性。不支持IE8以下。 如何理解 HTML CSS 语义化 用正确的标签做正确的事情。 html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析; 即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的; 搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO; 使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。 form表单的作用 form表单就是接受用户提交的数据，并在用户点提交时将数据传送给服务器，以便服务器端的程序处理数据。 name 定义提交的数据的名称。 action 提交到的地址。 method 提交的数据的方式，有get和post两种。 type: text: 一行文字 textarea: 一段文字 password: 提交用户密码，显示为黑点 radio: 单选圆圈 checkbox: 复选选项 hidden：暂存一些数据，可以进行安全校验。 max 规定input元素的最大值。 post 和get的区别 都是指表单向服务器传送数据用的方式 区别有 数据提交方式不同，get把提交的数据url可以看到，post看不到。 get一般用于提交少量数据，post用于提交大量数据。 get最多提交1k数据，浏览器的限制。post理论上无限制，受服务器限制。 get提交的数据在浏览器历史记录中，安全性不好。 在input里面，name的作用 为input元素定义了唯一的名称 ，没有name就无法提交 &lt;button&gt;提交&lt;/button&gt;,&lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;提交&lt;/a&gt;,&lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;的区别？ &lt;button&gt;提交&lt;/button&gt;是一个提交按钮 &lt;a class=&quot;btn&quot; href=&quot;#&quot;&gt;提交&lt;/a&gt;是一个链接，点提交跳转 &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;是提交表单，点提交提交表单 radio如何分组？1234567&lt;form&gt; &lt;p&gt;性别： &lt;input type="radio" name="sex" value="male"&gt;男&lt;/br&gt; &lt;input type="radio" name="sex" value="female"&gt;女&lt;/br&gt; &lt;input type="submit" value="提交"&gt; &lt;/p&gt;&lt;/form&gt; name相同时就能将radio分为一组，选项单选。 placeholder 属性 在输入框中显示提示用户应该输入的内容。 type=hidden隐藏域的作用 隐藏域在页面中对于用户是不可见的，在表单中插入隐藏域的目的在于收集或发送信息，以利于被处理表单的程序所使用。浏览者单击发送按钮发送表单的时候，隐藏域的信息也被一起发送到服务器。 用户提交一个表单上来时要确定用户的身份，可以用hidden里的信息核对确认。]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HTML查漏补缺（三）]]></title>
+    <url>%2F2016%2F05%2F29%2Fhtml%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA%EF%BC%88%E4%B8%89%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[line-height作用 设置行高。 检查CSS的兼容性 可以在can i use 上查看各浏览器对CSS的兼容情况。 在caniuse.com查询inline-block的兼容情况。 a标签的herf,title,target属性 例子&lt;a herf=&quot;http://www.baidu.com title=&quot;百度&quot; target=&quot;_blank&quot;&gt;百度&lt;/a&gt; herf属性规定链接的目标，可以是有效文档的相对和绝对URL。 title属性规定链接的额外信息，鼠标放在链接上时会显示出来。 target属性规定在何处打开链接，target=&quot;_blank会在新窗口打开链接。 alt属性是在图片不能打开时在图片位置显示的文本。 target=&quot;_blank&quot;在新窗口打开链接。 display:none,visibility:hidden和opacity:0 display:none是将元素完全隐藏，而且不占用页面，所占的页面会被其他的元素占据，功能完全消失，就是看不见也摸不着。 visibility:hidden是将元素隐藏，所占空间还在，只是不显示，就是说看不见但摸得着。 opacity:0设置元素的透明级别，0时元素完全透明但依然存在。 如何去除 a 链接的默认样式 去除a链接默认样式 a{text-decoration: none;} a链接不能继承父容器color属性]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HTML查漏补缺（二）]]></title>
+    <url>%2F2016%2F05%2F23%2Fhtml%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA%EF%BC%88%E4%BA%8C%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[样式引入方式样式有三种引入方式 外部样式表 1&lt;link rel="stylesheet" type="text/css" herf="index.css"&gt;` 内部样式表（位于标签内部） 123&lt;style type="text/css"&gt; p &#123;color:red;&#125;&lt;/style&gt; 内联样式(在HTML元素内部) 1&lt;p style="color: red;"&gt;&lt;/p&gt; link和@import区别 归属差别，link属于XHTML标签，而@import是CSS提供的一种方式。link标签除了可以加载css文件以外，还可以做其他的一些事情，比如声明页面链接属性，声明目录等。而@import只能用来加载CSS。 加载顺序不同，当一个页面开始被加载时，link引用的CSS会同时被加载。而@import引用的CSS会在页面被全部加载完成之后在加载。 兼容性的不同，@import是在CSS2.1的时候提出，所以老的浏览器不支持，只有在IE5以上才能识别，而link标签没有这个问题。 使用DOM控制样式时候的差别，当使用JavaScript控制DOM去改变样式时，只能使用link标签。 @import可以在CSS样式表中引入其他的样式。 文件路径 ../main.css 表示上一级文件夹下的main.css ./css/main.css 表示当前文件夹中的css文件夹中的main.css main.css和./main.css 表示当前文件夹的mian.css console.log 作用 console.log主要是用于调试代码，他会将调试信息输出到console控制tail上，并且不会影响网页的正常解析和显示。 text-align值的作用 left 左对齐 right 右对齐 center 居中 justity 两侧对齐 px,em,rem区别 px：像素 em：相对于父容器 rem：相对于HTML根节点，浏览器默认1em=16px。 对chrome 审查元素的功能 参考MDN-Web技术文档-CSS]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HTML查漏补缺（一）]]></title>
+    <url>%2F2016%2F05%2F22%2Fhtml%E6%9F%A5%E6%BC%8F%E8%A1%A5%E7%BC%BA%EF%BC%88%E4%B8%80%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[网页是什么 网页=html+CSS+JavaScropt html 网页元素内容 css 控制网页样式 JsvsScript 操作网页内容，实现功能和效果 网页乱码的原因是怎样产生的，如何解决？ 写网页流程有下面几步 用编辑器编写HTML文件 保存编写的HTML文件 用浏览器打开HTML文件 浏览器展示HTML文件 乱码是因为保存文件是用的编码方式和浏览器展示文件时用的解码方式不一致造成的。解决的话是在html文件&lt;head&gt;里添加&lt;mate charset=&quot;utf-8&quot;&gt;。乱码是一般在非英文以外的字符上出现的。告诉浏览器你采用的编码方式。utf-8 是编码方式，还有gbk等 unicode 和 utf-8,gbk有什么区别 UNICODE 只用2个字节(16位)就可以编码地球上所有地区的文字。但是，UNICODE只是理论上的编码方式，相当于给世界上每个文字打了个编号，但这编号具体如何在计算机里面存储，可以有多种实现方式。比如utf-8和gbk。 utf-8 utf-8（8-bit Unicode Transformation Format）是一种针对Unicode的可变长度字符编码，又称万国码。UTF-8用1到6个字节编码UNICODE字符。用在网页上可以同一页面显示中文简体繁体及其它语言（如英文，日文，韩文）。 gbk 中国制定的一套自己的规则，用2字节表示一个汉字，覆盖2万多个汉字。 颜色有几种写法? 三种 颜色名字：“red,biue,green” 十六进制颜色：#ffffff #cccccc 等 rgb : rgb(225,225,225) rgb(0,0,0)等。还有一种rgba,如rgba(0,225,0,0.3),0.3指的是透明度 &lt;!DOCTYOE html&gt; 有什么作用？ 一种声明，告诉浏览器文档采用的是html5规范，如果不写，浏览器可能用他自己的规范渲页面，可能会由于浏览器的不同渲染出来的页面也有所不同。 严格模式和混杂模式有什么区别？ 严格模式有声明&lt;!DOCTYOE html&gt; ，严格采w3school 标准 混杂模式没有申明&lt;!DOCTYOE html&gt; 。 mate 有什么作用，常见的值有哪些？ name 属性 Keywords（关键字）：告诉搜索引擎你的网页关键字。 description（网站内容描述）：告诉搜索引擎你的网站主要内容。 robots（机器人向导）：告诉搜索引擎那些页面需要被搜索，那些不需要。 还有author generator COPYRIGHT revisit-after等。 http-equiv属性 Expires(期限)：可以用于设定网页的到期时间。一旦网页过期，必须到服务器上重新传输 Pragma(cache模式)：禁止浏览器从本地计算机的缓存中访问页面内容。 Refresh(刷新)：自动刷新并指向新页面。 Set-Cookie(cookie设定)：如果网页过期，那么存盘的cookie将被删除。 Window-target(显示窗口的设定)：强制页面在当前窗口以独立页面显示。 content-Type(显示字符集的设定)：设定页面使用的字符集。 content-Language（显示语言的设定） http-equiv=”imagetoolbar”：指定是否显示图片工具栏。 Content-Script-Type：W3C网页规范，指明页面中脚本的类型。 常见的浏览器有哪些，什么内核？ Internet Explorer 内核：Trident safari 内核：Webkit Chrome 内核：Webkit Firefox 内核：Gecko Opera 内核：Pesto]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>HTML</tag>
+      </tags>
+  </entry>
+</search>
